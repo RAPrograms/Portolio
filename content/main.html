@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Title</title>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1'>
+{% extends 'layout.html' %}
 
-        <link rel="stylesheet" href="/styling/main.css">
+{% block head %}
+    <link rel="stylesheet" href="/styling/nav.css">
+{% endblock head %}
 
-        <script src="/scripts/test.js"></script>
-    </head>
-    <body>
-        {% include "nav.html" %}
+{% block body %}
+    {% include "nav.html" %}
 
-        <h1>Main content</h1>
-    </body>
-</html>
+    <h1>Main content</h1>
+
+    
+{% endblock %}
