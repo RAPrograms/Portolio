@@ -35,7 +35,7 @@ body > :is(header:nth-of-type(1), footer){
 body > :is(header:nth-of-type(1), footer) > *{
     justify-content: space-between;
     align-items: center;
-    padding: 20px 10px;
+    padding: 20px;
     display: flex;
 }
 
@@ -48,6 +48,7 @@ body > main, body > :is(header:nth-of-type(1), footer) > *{
 
 body > main{
     flex-grow: 1;
+    padding: 20px;
 }
 
 body > footer{
