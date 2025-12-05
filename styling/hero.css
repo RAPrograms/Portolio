@@ -1,0 +1,26 @@
+section.hero{
+    height: calc(100vh - var(--nav-height));
+    position: relative;
+}
+
+section.hero{
+    /* Creates background grid */
+    --colour: color-mix(in hsl shorter hue, var(--border-colour) 40%, transparent);
+
+    padding-bottom: 50px;
+    background-size: 70px 70px;
+    background-image:
+        linear-gradient(to right, var(--colour) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--colour) 1px, transparent 1px);
+}
+
+section.hero::after{
+    /* Gradient transition from grid to background */
+    background: linear-gradient(transparent, var(--background-colour));
+    position: absolute;
+    height: 50px;
+    content: "";
+    width: 100%;
+    bottom: 0;
+}
+
