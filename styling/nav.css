@@ -1,0 +1,6 @@
+body > header:nth-of-type(1){
+    border-bottom-width: 1px;
+    position: sticky;
+    top: 0;
+    left: 0;
+}

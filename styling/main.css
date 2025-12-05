@@ -1,3 +1,44 @@
+:root {
+    --border-colour: rgba(39, 44, 53, 0.5);
+    --max-width: 1153px;
+
+    color-scheme: dark;
+}
+
 body{
-    color: red
+    background-color: #0e1115;
+    flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+    margin: auto;
+    padding: 0;
+    margin: 0;
+}
+
+/* Adds borders to the footer and header */
+body > :is(header:nth-of-type(1), footer){
+    border: 0px solid var(--border-colour);
+}
+
+/* Header and footer containor */
+body > :is(header:nth-of-type(1), footer) > *{
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    display: flex;
+}
+
+/* Sets the max width for page content */
+body > main, body > :is(header:nth-of-type(1), footer) > *{
+    max-width: var(--max-width);
+    width: 100vw;
+    margin: auto;
+}
+
+body > main{
+    flex-grow: 1;
+}
+
+body > footer{
+    border-top-width: 1px !important;
 }
