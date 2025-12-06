@@ -50,7 +50,7 @@ body > :is(header:nth-of-type(1), footer) > *{
 body > main > section > *, body > :is(header:nth-of-type(1), footer) > *{
     max-width: var(--max-width);
     width: 100vw;
-    margin: unset auto;
+    margin: 0px auto;
 }
 
 body > main > section{

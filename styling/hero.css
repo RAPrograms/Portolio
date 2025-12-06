@@ -33,9 +33,10 @@ section.hero::after{
 }
 
 section.hero > *{
-    max-width: 672px;
+    max-width: min(672px, 100vw);
     margin: 0 auto;
     width: max-content;
+    translate: 0 50px;
 }
 
 section.hero > p:first-of-type{
@@ -47,6 +48,7 @@ section.hero > h1{
 }
 
 section.hero > p.statement{
+
     color: var(--faint-text-colour);
     font-size: larger;
 }
