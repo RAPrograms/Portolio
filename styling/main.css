@@ -18,6 +18,10 @@
     margin: 0;
 }
 
+a{
+    text-decoration: none;
+}
+
 body{
     font-family: "Outfit", sans-serif;
     background-color: var(--background-colour);
@@ -46,7 +50,7 @@ body > :is(header:nth-of-type(1), footer) > *{
 body > main > section > *, body > :is(header:nth-of-type(1), footer) > *{
     max-width: var(--max-width);
     width: 100vw;
-    margin: auto;
+    margin: unset auto;
 }
 
 body > main > section{
@@ -63,4 +67,39 @@ body > main{
 
 body > footer{
     border-top-width: 1px !important;
+}
+
+
+a.button{
+    border-radius: 10px;
+    width: max-content;
+    display: block;
+    padding: 15px;
+}
+
+a.button:is(.primary-solid, .secondary-solid){
+    background-color: var(--colour);
+    color: white;
+}
+
+a.button:is(.primary-solid, .secondary-solid):hover{
+    background: color-mix(in hsl shorter hue, var(--colour), black 15%);
+    transition: background-color 150ms ease-in, scale 150ms ease-in;
+}
+
+a.button.primary-solid{
+    --colour: var(--accent-colour);
+    transition: background-color 200ms ease-in, scale 200ms ease-in;
+}
+
+a.button.primary-solid:hover{
+    scale: 1.05;
+}
+
+a.button.secondary-solid{
+    --colour: rgb(51, 53, 58);
+}
+
+a.button.secondary-solid:hover{
+    outline: .5px solid var(--accent-colour);
 }

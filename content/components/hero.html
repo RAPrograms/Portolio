@@ -1,0 +1,29 @@
+{% import '/components/icons.html' as icons %}
+
+<section class="hero">
+    <p>Hi there, I'm</p>
+    <h1>RAPrograms</h1>
+
+    <p class="statement">Passionate about creating digital software with expertise in <span>web development</span>, <span>backend systems</span>, and <span>application development</span>.</p>
+    
+    <div class="buttons">
+        <a href="#projects" class="button primary-solid">View My Work</a>
+        <a href="#contact" class="button secondary-solid">Contact Me</a>
+    </div>
+
+    <div class="links">
+        <a href="">
+            {{icons.github()}}
+        </a>
+        <a href="">
+            {{icons.linkedin()}}
+        </a>
+        <a href="">
+            {{icons.email()}}
+        </a>
+    </div>
+
+    <a class="section-skip-bnt" href="#TODO">
+        {{icons.down_arrow()}}
+    </a>
+</section>

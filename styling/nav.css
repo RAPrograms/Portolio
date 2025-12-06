@@ -13,10 +13,6 @@ body > header:nth-of-type(1) > nav > div.links{
     gap: 20px;
 }
 
-body > header:nth-of-type(1) > nav a{
-    text-decoration: none;
-}
-
 body > header:nth-of-type(1) > nav > div.links > a{
     transition: 400ms ease-out;
     color: var(--faint-text-colour);
@@ -34,10 +30,10 @@ body > header:nth-of-type(1) > nav > div.links > a:hover{
 }
 
 body > header:nth-of-type(1) > nav > a.contact-bnt{
-    color: var(--accent-colour);
-    padding: 10px;
-    border: 1px solid var(--accent-colour);
     background: color-mix(in hsl shorter hue, var(--accent-colour), transparent 80%);
+    border: 1px solid var(--accent-colour);
+    color: var(--accent-colour);
     border-radius: 10px;
     font-size: small;
+    padding: 10px;
 }

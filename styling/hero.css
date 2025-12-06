@@ -1,14 +1,22 @@
 section.hero{
     height: calc(100vh - var(--nav-height));
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    place-items: center;
+    text-align: center;
     position: relative;
+    display: flex;
+    gap: 30px;
 }
+
 
 section.hero{
     /* Creates background grid */
     --colour: color-mix(in hsl shorter hue, var(--border-colour) 40%, transparent);
 
-    padding-bottom: 50px;
     background-size: 70px 70px;
+    padding-bottom: 50px;
     background-image:
         linear-gradient(to right, var(--colour) 1px, transparent 1px),
         linear-gradient(to bottom, var(--colour) 1px, transparent 1px);
@@ -24,3 +32,60 @@ section.hero::after{
     bottom: 0;
 }
 
+section.hero > *{
+    max-width: 672px;
+    margin: 0 auto;
+    width: max-content;
+}
+
+section.hero > p:first-of-type{
+    color: var(--accent-colour);
+}
+
+section.hero > h1{
+    font-size: min(80px, 14vw);
+}
+
+section.hero > p.statement{
+    color: var(--faint-text-colour);
+    font-size: larger;
+}
+
+section.hero > p.statement > span{
+    color: var(--text-colour);
+}
+
+section.hero > .buttons{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+section.hero > .links{
+    display: flex;
+    margin-top: 30px;
+    gap: 50px;
+}
+
+section.hero > .links > a{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+section.hero > .links > a:hover{
+    background: color-mix(in hsl shorter hue, var(--accent-colour), transparent 80%);
+    color: var(--accent-colour);
+}
+
+section.hero a:has(svg){
+    color: var(--faint-text-colour);
+}
+
+section.hero > .section-skip-bnt{
+    margin-top: 20px;
+}
+
+section.hero > .section-skip-bnt:hover{
+    color: var(--accent-colour);
+}
