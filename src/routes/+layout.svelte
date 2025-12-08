@@ -28,7 +28,7 @@
 		display: flex;
 
 		& > div{
-			height: calc(100vh - var(--nav-height));
+			min-height: calc(100vh - var(--nav-height));
 		}
 	}
 </style>

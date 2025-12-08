@@ -16,7 +16,11 @@ const config = {
 			fallback: undefined,
 			precompress: false,
 			strict: true
-		})
+		}),
+
+		alias: {
+			"$styling/*": "/src/styling"
+		}
 	}
 };
 
