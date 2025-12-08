@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  one:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
