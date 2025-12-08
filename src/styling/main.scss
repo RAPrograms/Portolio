@@ -1,9 +1,12 @@
 @import "./fonts.scss";
 
 :root {
+    --max-content-width: 1200px;
     --nav-height: 3rem;
 
+    --border-colour: #272C35;
     --background-colour: #0e1115;
+    --secondary-text-colour: #7B899D;
 
     color-scheme: dark;
 }
