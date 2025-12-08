@@ -1,0 +1,17 @@
+:root {
+    --background-colour: #0e1115;
+
+    color-scheme: dark;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body{
+    font-family: "Outfit", sans-serif;
+    background-color: var(--background-colour);
+    min-height: 100vh;
+    padding: 0;
+}
