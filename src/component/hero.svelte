@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
+    import Typewritertext from "./typewritertext.svelte";
 
     const {
         children,
@@ -34,7 +35,14 @@
         </h1>
 
         
-        <div class="attributes">&gt;  Gamer</div>
+        <div class="attributes">
+            <Typewritertext lines={[
+                "Software Developer",
+                "Programmer",
+                "Gamer",
+                "Coder"
+            ]}/>
+        </div>
 
         <p class="description">
             {@render children()}
@@ -142,9 +150,7 @@
             }
 
             & > .attributes{
-                margin: 10px 0 40px 0;
-                line-height: 1.5rem;
-                font-size: 1.5rem;
+                margin: 10px 0 30px 0;
             }
 
             & > .description{
