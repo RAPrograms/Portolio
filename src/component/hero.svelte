@@ -6,10 +6,12 @@
         children,
         flavor_text,
         return_btn = false,
+        cycling_text = [],
         availability_notice = false
     } : {
         flavor_text: string,
         return_btn: boolean,
+        cycling_text: Array<string>,
         availability_notice: boolean,
         children: Snippet
     } = $props()
@@ -33,15 +35,11 @@
             <div>whoami</div>
         </h1>
 
-        
-        <div class="attributes">
-            <Typewritertext lines={[
-                "Software Developer",
-                "Programmer",
-                "Gamer",
-                "Coder"
-            ]}/>
-        </div>
+        {#if cycling_text.length > 0}
+            <div class="attributes">
+                <Typewritertext lines={cycling_text}/>
+            </div>
+        {/if}
 
         <p class="description">
             {@render children()}
@@ -128,6 +126,7 @@
             & > h1{
                 font-size: clamp(2rem,8vw,4rem);
                 word-break: keep-all;
+                margin-bottom: 10px;
                 text-align: center;
                 font-weight: 800;
                 line-height: 1.1;
@@ -140,11 +139,8 @@
                 }
             }
 
-            & > .attributes{
-                margin: 10px 0 30px 0;
-            }
-
             & > .description{
+                margin-top: 30px;
                 font-size: clamp(0.9rem,3vw,1.3rem);
                 color: var(--secondary-text-colour);
 
