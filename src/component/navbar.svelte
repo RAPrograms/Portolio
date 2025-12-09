@@ -26,18 +26,19 @@
     @use "$styling/_variables.scss" as *;
 
     header{
-        border-bottom: 1px solid var(--border-colour);
+        border-bottom: 1px solid var(--secondary-border-colour);
+        backdrop-filter: blur(24px);
         height: var(--nav-height);
         position: sticky;
-        top: 0;
-        left: 0;
-        backdrop-filter: blur(24px);
         display: block;
+        left: 0;
+        z-index: 5;
+        top: 0;
 
         & > nav{
             @include center_content();
 
-            max-width: var(--max-content-width);
+            
             justify-content: space-between;
             align-items: center;
             display: flex;
