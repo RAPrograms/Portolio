@@ -1,8 +1,16 @@
 <script lang="ts">
+    import type { Snippet } from "svelte";
+
     const {
-        return_btn = false
+        children,
+        flavor_text,
+        return_btn = false,
+        availability_notice = false
     } : {
-        return_bnt: boolean
+        flavor_text: string,
+        return_bnt: boolean,
+        availability_notice: boolean,
+        children: Snippet
     } = $props()
 </script>
 
@@ -18,19 +26,24 @@
     {/if}
 
     <div class="content">
-        <p class="flavor-text">$ Sleep && Eat && Game && Code</p>
+        <p class="flavor-text">$ {flavor_text}</p>
 
         <h1>
             <div>reece@raprograms:~$</div>
             <div>whoami</div>
         </h1>
 
+        
         <div class="attributes">&gt;  Gamer</div>
 
-        <p class="description">Passionate about creating digital software with expertise in <span>web development</span>, <span>back-end systems</span>, and <span>application development</span>.</p>
+        <p class="description">
+            {@render children()}
+        </p>
     </div>
     
-    <div class="availability-tag">Available for projects</div>
+    {#if availability_notice}
+        <div class="availability-tag">Available for projects</div>
+    {/if}
 
     <a href="#main">
         <img src="/icons/circled-down-arrow.svg" alt="Continue to main content">
@@ -138,7 +151,7 @@
                 font-size: clamp(0.9rem,3vw,1.3rem);
                 color: var(--secondary-text-colour);
 
-                & > span{
+                & > :global(span){
                     color: var(--primary-text-colour);
                 }
             }
