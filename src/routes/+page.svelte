@@ -15,7 +15,7 @@
 
 <main id="main">
 
-    <section>
+    <section class="about">
         <h2>About Me</h2>
         <p>
             Hi there, my name is Reece.
@@ -23,9 +23,17 @@
             from hardware, back-end, front-end, mechanics, cybersecurity and so much more.
         </p>
 
-        <HighlightCard icon="code" title="19,000+ Lines of code">
-            Contributed across Python, JavaScript, Java, HTML & CSS projects.
-        </HighlightCard>
+        <div class="highlights">
+            <HighlightCard icon="users" title="Collaboration Award">
+                College Values Award for Collaboration & Innovation 2024.
+            </HighlightCard>
+            <HighlightCard icon="code" title="19,000+ Lines of code">
+                Contributed across Python, JavaScript, Java, HTML & CSS projects.
+            </HighlightCard>
+            <HighlightCard icon="code" title="Student of the Year">
+                Recognised as Student of the Year 2024 for excellence.
+            </HighlightCard>
+        </div>
     </section>
 
 </main>
@@ -33,17 +41,33 @@
 <style lang="scss">
     @use "$styling/_variables.scss" as *;
 
-    section{
+    section.about{
         @include center_content();
 
         flex-direction: column;
-        text-align: center;
         align-items: center;
+        text-align: center;
         display: flex;
         gap: 20px;
 
         & > p{
-            width: 70%;
+            font-size: 1.3rem;
+            width: 80%;
+        }
+
+        & > .highlights{
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            display: flex;
+            gap: 2rem;
+
+            & > :global(article){
+                max-width: 350px;
+                height: 100%;
+                flex-grow: 1;
+            }
         }
     }
 </style>

@@ -35,12 +35,12 @@
         background: linear-gradient(-210deg, color-mix(in hsl shorter hue, var(--primary-colour) 60%, transparent), #242931 30%);
         color: var(--secondary-text-colour);
         flex-direction: column;
-        border-radius: 20px;
+        border-radius: 12px;
         position: relative;
         isolation: isolate;
         text-align: left;
-        padding: 30px;
         display: flex;
+        padding: 30px;
         gap: 15px;
 
         &::after{
@@ -54,12 +54,6 @@
             left: 2px;
             top: 2px;
         }
-        
-        //
-        //border-image: linear-gradient(-210deg, color-mix(in hsl shorter hue, var(--primary-colour) 70%, transparent), transparent 30%) 30;
-        //border-width: 2px;
-        //border-style: solid;
-        
 
         & >  div{
             background-color: color-mix(in hsl shorter hue, var(--primary-colour) 20%, transparent);
