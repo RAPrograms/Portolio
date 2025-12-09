@@ -24,7 +24,6 @@
 <style lang="scss">
 	:global(body > div){
 		flex-direction: column;
-		overflow-x: hidden;
 		min-height: 100vh;
 		display: flex;
 

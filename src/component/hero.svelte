@@ -49,12 +49,13 @@
         height: calc(100vh - var(--nav-height));
         margin-bottom: var(--bottom-gap);
         justify-content: space-evenly;
-        justify-content: center;
         flex-direction: column;
         align-items: center;
         isolation: isolate;
         position: relative;
+        overflow: hidden;
         display: flex;
+        gap: 20px;
 
         // Adds background grid
         background-size: 40px 40px;
@@ -62,6 +63,12 @@
         background-image:
             linear-gradient(to right, var(--grid-colour) 1px, transparent 1px),
             linear-gradient(to bottom, var(--grid-colour) 1px, transparent 1px);
+
+        @media (width <= 570px) {
+            & > div:first-of-type{
+                display: none;
+            }
+        }
 
         &::after{
             background: linear-gradient(transparent, var(--background-colour));
@@ -142,6 +149,10 @@
 
             padding: 10px 25px;
             margin-top: 20px;
+
+            @media (height <= 570px) {
+                display: none;
+            }
         }
 
         & > .pulses{
