@@ -22,6 +22,12 @@
     margin: 0;
 }
 
+html{
+    @media (prefers-reduced-motion: none) {
+        scroll-behavior: smooth;
+    }
+}
+
 body{
     font-family: Space Grotesk, system-ui, sans-serif;
     background-color: var(--background-colour);
@@ -32,6 +38,11 @@ body{
 h1, h2, h3, h4, h5, h6{
     font-family: JetBrains Mono, Consolas, Monaco, monospace;
     margin: 0;
+}
+
+h2{
+    font-size: 1.25rem;
+    color: var(--primary-colour)
 }
 
 p{

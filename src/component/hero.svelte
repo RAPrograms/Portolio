@@ -162,7 +162,6 @@
 
             &::before, &::after{
                 background-color: color-mix(in hsl shorter hue, var(--primary-colour) 10%, transparent);
-                animation: pulse 3s ease-in-out infinite alternate;
                 will-change: opacity, filter;
                 border-radius: 100%;
                 filter: blur(80px);
@@ -170,6 +169,10 @@
                 aspect-ratio: 1/1;
                 height: 100%;
                 content: "";
+
+                @media (prefers-reduced-motion: none) {
+                    animation: pulse 3s ease-in-out infinite alternate;
+                }
             }
 
             &::before{
