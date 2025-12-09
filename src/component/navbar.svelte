@@ -1,3 +1,5 @@
+<a class="accessibility-skip" href="#main">Skip to content</a>
+
 <header>
     <nav>
         <a href="/">
@@ -24,6 +26,22 @@
 
 <style lang="scss">
     @use "$styling/_variables.scss" as *;
+
+    a.accessibility-skip{
+        @include fainted-button-tag();
+
+        position: absolute;
+        backdrop-filter: blur(20px);
+        translate: -50% 0;
+        top: 3.5px;
+        z-index: 6;
+        left: 50%;
+
+
+        &:not(:is(:focus, :active)){
+            opacity: 0;
+        }
+    }
 
     header{
         border-bottom: 1px solid var(--secondary-border-colour);

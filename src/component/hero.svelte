@@ -9,14 +9,13 @@
         availability_notice = false
     } : {
         flavor_text: string,
-        return_bnt: boolean,
+        return_btn: boolean,
         availability_notice: boolean,
         children: Snippet
     } = $props()
 </script>
 
 <section class="hero">
-
     {#if return_btn}
         <a href="/" class="return">
             <img src="/icons/left-arrow.svg" alt="">
@@ -106,17 +105,9 @@
         }
 
         & > a.return{
-            align-self: flex-start;
+            @include fainted-button-tag();
+
             margin: 0 0 0 max(calc((100vw - var(--max-content-width)) / 2), 0px);
-            border: 1px solid color-mix(in hsl shorter hue, var(--primary-border-colour) 30%, transparent) ;
-            background: rgba(242, 242, 242, 0.05);
-            color: var(--primary-text-colour);
-            text-decoration: none;
-            border-radius: 10px;
-            align-items: center;
-            display: flex;
-            padding: 10px;
-            gap: 5px;
 
             & > span{
                 translate: 0 2px;
@@ -160,17 +151,6 @@
                 & > :global(span){
                     color: var(--primary-text-colour);
                 }
-            }
-        }
-
-        & > .availability-tag{
-            @include tag(var(--primary-colour));
-
-            padding: 10px 25px;
-            margin-top: 20px;
-
-            @media (height <= 570px) {
-                display: none;
             }
         }
 
