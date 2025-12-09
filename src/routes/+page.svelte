@@ -3,7 +3,12 @@
 
 </script>
 
-<Hero flavor_text="Sleep && Eat && Game && Code">
+<Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
+    "Software Developer",
+    "Programmer",
+    "Gamer",
+    "Coder"
+]}>
     Passionate about creating digital software with expertise in <span>web development</span>, <span>back-end systems</span>, and <span>application development</span>.
 </Hero>
 
