@@ -38,12 +38,10 @@
         & > nav{
             @include center_content();
 
-            
             justify-content: space-between;
             align-items: center;
             display: flex;
             height: 100%;
-
 
             & > ul.links{
                 list-style-type: none;
@@ -52,7 +50,18 @@
 
                 a{
                     color: var(--secondary-text-colour);
+                    transition: 300ms ease-in-out;
                     text-decoration: none;
+                    padding: 0 2.5px;
+                    height: 100%;
+
+                    &:last-child{
+                        padding-right: 0;
+                    }
+
+                    &:hover{
+                        color: var(--primary-text-colour);
+                    }
                 }
             }
         }
