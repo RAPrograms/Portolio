@@ -35,6 +35,8 @@
     <a href="#main">
         <img src="/icons/circled-down-arrow.svg" alt="Continue to main content">
     </a>
+
+    <div class="pulses"></div>
 </section>
 
 <style lang="scss">
@@ -46,10 +48,11 @@
 
         height: calc(100vh - var(--nav-height));
         margin-bottom: var(--bottom-gap);
+        justify-content: space-evenly;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+        isolation: isolate;
         position: relative;
         display: flex;
 
@@ -97,10 +100,10 @@
             width: min-content;
 
             & > p.flavor-text{
-                color: #C76969;
-                font-size: 1.2rem;
                 line-height: 1.5rem;
                 margin-bottom: 20px;
+                font-size: 1.2rem;
+                color: #C76969;
             }
 
             & > h1{
@@ -120,8 +123,8 @@
 
             & > .attributes{
                 margin: 10px 0 40px 0;
-                font-size: 1.5rem;
                 line-height: 1.5rem;
+                font-size: 1.5rem;
             }
 
             & > .description{
@@ -141,5 +144,51 @@
             margin-top: 20px;
         }
 
+        & > .pulses{
+            padding: 0 !important;
+            margin: 0 !important;
+            pointer-events: none;
+            position: absolute;
+            height: 24rem;
+            width: 100vw;
+            opacity: .8;
+            z-index: -1;
+
+            &::before, &::after{
+                background-color: color-mix(in hsl shorter hue, var(--primary-colour) 10%, transparent);
+                animation: pulse 3s ease-in-out infinite alternate;
+                will-change: opacity, filter;
+                border-radius: 100%;
+                filter: blur(80px);
+                position: absolute;
+                aspect-ratio: 1/1;
+                height: 100%;
+                content: "";
+            }
+
+            &::before{
+                translate: -45% -30px;
+                left: 0;
+            }
+
+            &::after{
+                animation-delay: 3s;
+                translate: 45% 30px;
+                right: 0;
+
+                @media (width < 530px) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @keyframes pulse{
+        from {
+            opacity: 0.3;
+        }
+        to{
+            opacity: 1;
+        }
     }
 </style>
