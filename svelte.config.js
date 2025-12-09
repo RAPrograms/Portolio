@@ -18,6 +18,10 @@ const config = {
 			strict: true
 		}),
 
+		prerender: {
+			handleMissingId: "warn"
+		},
+
 		alias: {
 			"$styling/*": "/src/styling"
 		}
