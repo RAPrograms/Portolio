@@ -6,6 +6,11 @@
             <img src="/logos/primary.svg" alt="RAPrograms Logo">
         </a>
 
+        <!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
+        <label class="menu-btn" role="button" aria-label="Menu">
+            <input type="checkbox">
+        </label>
+
         <ul class="links">
             <li>
                 <a href="#about">About</a>
@@ -26,6 +31,8 @@
 
 <style lang="scss">
     @use "$styling/_variables.scss" as *;
+
+    $Mobile-Breakpoint: 460px;
 
     a.accessibility-skip{
         @include fainted-button-tag();
@@ -61,10 +68,66 @@
             display: flex;
             height: 100%;
 
+            & *{
+                @extend .no-select;
+            }
+
+            & > label.menu-btn{
+                @media (width <= $Mobile-Breakpoint) {
+                    display: block;
+                    height: 90%;
+                    aspect-ratio: 1/1;
+                    background-repeat: no-repeat;
+                    background-size: 70%;
+                    padding-top: 10px;
+                    background-position: center;
+                    opacity: .5;
+                    cursor: pointer;
+
+                    &:has(input[type=checkbox]:checked){
+                        background-image: url("/icons/cross.svg");
+                    }
+
+                    &:not(:has(input[type=checkbox]:checked)){
+                        background-image: url("/icons/menu.svg");
+                    }
+
+                    & > input[type=checkbox]{
+                        display: none;
+                    }
+                }
+
+                @media (width > $Mobile-Breakpoint) {
+                    display: none;
+                    visibility: hidden;
+                }
+            }
+
+            @media (width <= $Mobile-Breakpoint) {
+                & > label.menu-btn:has(input[type=checkbox]:not(:checked)) ~ ul.links{
+                    display: none;
+                    visibility: none;
+                }
+            }
+
             & > ul.links{
                 list-style-type: none;
                 display: flex;
                 gap: 10px;
+
+                @media (width <= $Mobile-Breakpoint) {
+                    height: calc(100vh - var(--nav-height));
+                    backdrop-filter: blur(24px);
+                    background-color: #0e1115e5;
+                    flex-direction: column;
+                    align-items: center;
+                    position: fixed;
+                    padding: 30px 0;
+                    width: 100vw;
+                    top: 100%;
+                    gap: 30px;
+                    right: 0;
+                }
 
                 a{
                     color: var(--secondary-text-colour);
