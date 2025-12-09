@@ -1,5 +1,14 @@
 @mixin center_content(){
-    padding: 0 10px;
-    margin-left: auto;
+    max-width: var(--max-content-width);
     margin-right: auto;
+    margin-left: auto;
+    padding: 0 10px;
+}
+
+@mixin tag($colour){
+    background-color: color-mix(in hsl shorter hue, $colour 10%, transparent);
+    border: 1px solid $colour;
+    border-radius: 20px;
+    color: $colour;
+    padding: 10px;
 }

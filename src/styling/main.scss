@@ -4,9 +4,15 @@
     --max-content-width: 1200px;
     --nav-height: 3rem;
 
-    --border-colour: #272C35;
     --background-colour: #0e1115;
+
+    --primary-border-colour: #757575;
+    --secondary-border-colour: #272C35;
+
+    --primary-text-colour: white;
     --secondary-text-colour: #7B899D;
+
+    --primary-colour: #DF3A3A;
 
     color-scheme: dark;
 }
@@ -25,5 +31,10 @@ body{
 
 h1, h2, h3, h4, h5, h6{
     font-family: JetBrains Mono, Consolas, Monaco, monospace;
+    margin: 0;
+}
+
+p{
+    padding: 0;
     margin: 0;
 }
