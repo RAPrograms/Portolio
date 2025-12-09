@@ -23,7 +23,8 @@ const config = {
 		},
 
 		alias: {
-			"$styling/*": "/src/styling"
+			"$styling/*": "/src/styling",
+			"$icons/*": "/static/icons"
 		}
 	}
 };
