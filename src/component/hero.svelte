@@ -172,9 +172,11 @@
             }
 
             &::after{
-                animation-delay: 3s;
+                animation-delay: 1s;
+                animation-duration: 4.5s;
                 translate: 45% 30px;
                 right: 0;
+                opacity: 0.3;
 
                 @media (width < 530px) {
                     display: none;
