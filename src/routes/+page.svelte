@@ -1,7 +1,6 @@
 <script>
-    import Hero from "../component/hero.svelte";
     import HighlightCard from "../component/highlight-card.svelte";
-
+    import Hero from "../component/hero.svelte";
 </script>
 
 <Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
@@ -36,10 +35,29 @@
         </div>
     </section>
 
+    <section class="technology">
+        <header>
+            <h2>Skills & Tools</h2>
+            <p>Can you tell that I love to experiment?</p>
+        </header>
+    </section>
+
 </main>
 
 <style lang="scss">
     @use "$styling/_variables.scss" as *;
+
+    main{
+        flex-direction: column;
+        display: flex;
+        gap: 50px;
+
+        & > section{
+            padding: 20px;
+        }
+    }
+
+
 
     section.about{
         @include center_content();
@@ -68,6 +86,32 @@
                 height: 100%;
                 flex-grow: 1;
             }
+        }
+    }
+
+    section.technology{
+        background-color: #1B1B1B;
+        position: relative;
+        margin: 70px 0;
+        height: 500px;
+
+        &::before, &::after{
+            background-color: #1B1B1B;
+            content: "";
+            left: 0;
+            width: 100%;
+            position: absolute;
+            height: 50px;
+        }
+
+        &::before{
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+            bottom: 100%;
+        }
+
+        &::after{
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            top: 100%;
         }
     }
 </style>

@@ -1,15 +1,12 @@
 <script lang="ts">
+    import js_available from "$lib/availability.ts"
     import { onMount } from "svelte";
 
     const { lines } : { lines: Array<string> } = $props()
 
     let index = $state(0)
-    let js_enabled = $state(false)
 
     onMount(() => {
-        if(lines.length > 1)
-            js_enabled=true
-
         setInterval(() => {
             if(lines.length > index + 1)
                 index += 1
@@ -21,7 +18,7 @@
 
 <div class="typewriter">
   <div data-content={lines[index]}>
-    <p class:looping={js_enabled} style="animation-timing-function: steps({lines[index].length})">{lines[index]}</p>
+    <p class:looping={$js_available} style="animation-timing-function: steps({lines[index].length})">{lines[index]}</p>
   </div>
 </div>
 
