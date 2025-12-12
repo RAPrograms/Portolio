@@ -8,6 +8,9 @@
         PUBLIC_CONTACT_EMAIL,
         PUBLIC_GITHUB_USERNAME,
         PUBLIC_LINKEDIN_USERNAME,
+
+        PUBLIC_LOCATION_TEXT,
+        PUBLIC_LOCATION_URL
     } from '$env/static/public';
 </script>
 
@@ -79,26 +82,28 @@
                         </li>
 
                         {#if PUBLIC_LINKEDIN_USERNAME != "" && PUBLIC_LINKEDIN_USERNAME != undefined}
+                        <li>
+                            <a href="https://www.linkedin.com/in/{PUBLIC_LINKEDIN_USERNAME}" target="_blank" aria-label="Linkedin Link">
+                                <img src="/icons/linkedin.svg" alt="">
+                                <b>Linked In</b>
+                                <div>RAPrograms</div>
+                                <img src="/icons/right-line-arrow.svg" alt="">
+                            </a>
+                        </li>
+                        {/if}
+                        
+                        <hr>
+                       
+                        {#if PUBLIC_LOCATION_TEXT != "" && PUBLIC_LOCATION_URL != ""}
                             <li>
-                                <a href="www.linkedin.com/in/{PUBLIC_LINKEDIN_USERNAME}" target="_blank" aria-label="Linkedin Link">
-                                    <img src="/icons/linkedin.svg" alt="">
-                                    <b>Linked In</b>
-                                    <div>RAPrograms</div>
-                                    <img src="/icons/right-line-arrow.svg" alt="">
+                                <a href={PUBLIC_LOCATION_URL} target="_blank" aria-label="Location in ">
+                                    <img src="/icons/based-location.svg" alt="">
+                                    <b>Located</b>
+                                    <div>{PUBLIC_LOCATION_TEXT}</div>
+                                    <img src="/icons/based-location.svg" alt="">
                                 </a>
                             </li>
                         {/if}
-
-                        <hr>
-
-                        <li>
-                            <a href="reece@example.com" aria-label="Location in ">
-                                <img src="/icons/based-location.svg" alt="">
-                                <b>Located</b>
-                                <div>Area</div>
-                                <img src="/icons/based-location.svg" alt="">
-                            </a>
-                        </li>
                     </ul>
                 </aside>
             </div>
