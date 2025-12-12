@@ -20,11 +20,11 @@
     @use "$styling/_variables.scss" as *;
 
     form{
-        @include glass-card();
+        @include glass-card(15px);
 
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
 
         & > button[type=submit]{
             @include coloured-tag(var(--colour));
