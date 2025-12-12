@@ -4,7 +4,10 @@
     import Form from "../component/form/form.svelte";
     import Hero from "../component/hero.svelte";
     
-	import { PUBLIC_GITHUB_USERNAME } from '$env/static/public';
+	import {
+        PUBLIC_GITHUB_USERNAME,
+        PUBLIC_CONTACT_EMAIL
+    } from '$env/static/public';
 </script>
 
 <Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
@@ -57,10 +60,10 @@
                 <aside>
                     <ul>
                         <li>
-                            <a href="reece@example.com" aria-label="Email Link">
+                            <a href="mailto:{PUBLIC_CONTACT_EMAIL}" aria-label="Email Link">
                                 <img src="/icons/email.svg" alt="">
                                 <b>Email</b>
-                                <div>reece@example.com</div>
+                                <div>{PUBLIC_CONTACT_EMAIL}</div>
                                 <img src="/icons/right-line-arrow.svg" alt="">
                             </a>
                         </li>
