@@ -20,7 +20,7 @@
     <!-- Honey Pot -->
     <label>
         <div>Don't fill this field out</div>
-        <input type="text" name="additional_infomation" required tabindex="-1" autocomplete="off">
+        <input type="text" name="additional_infomation" tabindex="-1" autocomplete="off">
     </label>
 
     <button type="submit">Submit</button>
