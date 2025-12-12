@@ -32,6 +32,7 @@ jobs:
         env:
           PUBLIC_GITHUB_USERNAME: ${{ github.repository_owner }}
           PUBLIC_CONTACT_EMAIL: ${{ vars.EMAIL }}
+          PUBLIC_LINKEDIN_USERNAME: ${{ vars.LINKEDIN }}
           
 
       - name: Upload artifact
