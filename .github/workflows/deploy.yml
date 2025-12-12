@@ -30,7 +30,8 @@ jobs:
       - name: Build
         run: bun run build
         env:
-          PUBLIC_GITHUB_USERNAME: ${{github.repository_owner}}
+          PUBLIC_GITHUB_USERNAME: ${{ github.repository_owner }}
+          PUBLIC_CONTACT_EMAIL: ${{ vars.EMAIL }}
           
 
       - name: Upload artifact
