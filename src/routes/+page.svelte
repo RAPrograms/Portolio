@@ -1,8 +1,9 @@
 <script>
     import HighlightCard from "../component/highlight-card.svelte";
-    import Hero from "../component/hero.svelte";
-    import Form from "../component/form/form.svelte";
     import FormField from "../component/form/form-field.svelte";
+    import Form from "../component/form/form.svelte";
+    import Hero from "../component/hero.svelte";
+    import { onMount } from "svelte";
 </script>
 
 <Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
@@ -44,12 +45,52 @@
                 <p>Let us create magic!</p>
             </header>
 
-            <Form>
-                <FormField title="Name" name="name"/>
-                <FormField title="Email" name="email_address" type="email"/>
-                <FormField title="Subject" name="subject"/>
-                <FormField title="What's on your mind?" name="message" kind="textarea"/>
-            </Form>
+            <div>
+                <Form>
+                    <FormField title="Name" name="name"/>
+                    <FormField title="Email" name="email_address" type="email"/>
+                    <FormField title="Subject" name="subject"/>
+                    <FormField title="What's on your mind?" name="message" kind="textarea"/>
+                </Form>
+
+                <aside>
+                    <ul>
+                        <li>
+                            <a href="reece@example.com" aria-label="Email Link">
+                                <img src="/icons/email.svg" alt="">
+                                <b>Email</b>
+                                <div>reece@example.com</div>
+                                <img src="/icons/right-line-arrow.svg" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com" aria-label="Email Link">
+                                <img src="/icons/github.svg" alt="">
+                                <b>Github</b>
+                                <div>RAPrograms</div>
+                                <img src="/icons/right-line-arrow.svg" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="reece@example.com" aria-label="Email Link">
+                                <img src="/icons/linkedin.svg" alt="">
+                                <b>Linked In</b>
+                                <div>RAPrograms</div>
+                                <img src="/icons/right-line-arrow.svg" alt="">
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a href="reece@example.com" aria-label="Email Link">
+                                <img src="/icons/based-location.svg" alt="">
+                                <b>Located</b>
+                                <div>Area</div>
+                                <img src="/icons/based-location.svg" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
         </section>
     </div>
 
@@ -136,7 +177,70 @@
         }
     }
 
-    section#contact{
-       
+    section#contact > div{
+        display: flex;
+        width: 80%;
+        max-width: 98vw;
+        justify-content: center;
+        gap: 30px;
+        
+        @media (width >= 840px) {
+            flex-direction: row-reverse;
+        }
+
+        @media (width < 840px) {
+            flex-direction: column;
+        }
+
+        & > :global(form){
+            flex: 2;
+        }
+
+        & > aside {
+            flex: 1;
+            width: 100%;
+
+            & > ul{
+                flex-direction: column;
+                display: flex;
+                gap: 20px;
+
+                & > li > a{
+                    @include glass-card(15px);
+
+                    grid-template-columns: max-content 1fr max-content; 
+                    color: var(--primary-text-colour);
+                    grid-template-rows: 1fr 1fr; 
+                    align-items: center;
+                    text-align: left;
+                    display: grid;
+                    gap: 3px 10px;
+                    grid-template-areas: 
+                        "Icon Name Arrow"
+                        "Icon Value Arrow";
+
+                    & > img{
+                        aspect-ratio: 1/1;
+                        width: 100%;
+                    }
+
+                    & > img:first-child{
+                        grid-area: Icon;
+                    }
+
+                    & > b{
+                        grid-area: Name;
+                    }
+
+                    & > div{
+                        grid-area: Value;
+                    }
+
+                    & > img:last-child{
+                        grid-area: Arrow;
+                    }
+                }
+            }
+        }
     }
 </style>

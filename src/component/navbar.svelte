@@ -111,7 +111,6 @@
             }
 
             & > ul.links{
-                list-style-type: none;
                 display: flex;
                 gap: 10px;
 
@@ -132,7 +131,6 @@
                 a{
                     color: var(--secondary-text-colour);
                     transition: 300ms ease-in-out;
-                    text-decoration: none;
                     padding: 0 2.5px;
                     height: 100%;
 

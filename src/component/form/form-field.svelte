@@ -30,7 +30,7 @@
 
     label{
         @include glass-card(
-            20px,
+            10px,
             0px,
             var(--glow-colour, rgba(255, 255, 255, 0.961)),
             var(--glow-size, 10%),
@@ -60,6 +60,7 @@
         }
         
         & > textarea{
+            min-height: 100px;
             resize: vertical;
         }
     }
