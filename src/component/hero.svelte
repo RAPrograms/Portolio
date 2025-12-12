@@ -79,8 +79,8 @@
         gap: 20px;
 
         // Adds background grid
-        background-size: 40px 40px;
         background-position: -1px -1px;
+        background-size: 40px 40px;
         background-image:
             linear-gradient(to right, var(--grid-colour) 1px, transparent 1px),
             linear-gradient(to bottom, var(--grid-colour) 1px, transparent 1px);
@@ -143,9 +143,9 @@
             }
 
             & > .description{
-                margin-top: 30px;
                 font-size: clamp(0.9rem,3vw,1.3rem);
                 color: var(--secondary-text-colour);
+                margin-top: 30px;
 
                 & > :global(span){
                     color: var(--primary-text-colour);
@@ -188,8 +188,8 @@
             }
 
             &::after{
-                animation-delay: 1s;
                 animation-duration: 4.5s;
+                animation-delay: 1s;
                 translate: 45% 30px;
                 right: 0;
                 opacity: 0.3;

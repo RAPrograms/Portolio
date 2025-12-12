@@ -57,10 +57,10 @@
 
         & >  div{
             background-color: color-mix(in hsl shorter hue, var(--primary-colour) 20%, transparent);
-            padding: 10px;
-            border-radius: 10px;
             color: var(--primary-colour);
+            border-radius: 10px;
             width: max-content;
+            padding: 10px;
 
             & > :global(svg){
                 color: var(--primary-colour);

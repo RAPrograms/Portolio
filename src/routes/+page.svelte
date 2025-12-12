@@ -14,6 +14,24 @@
     } from '$env/static/public';
 </script>
 
+{#snippet details_card(
+    icon: string,
+    link: string,
+    title: string,
+    value: string,
+    accessibility_label: string
+)}
+	<li>
+        <a href={link} aria-label={accessibility_label} target="_blank">
+            <img src="/icons/{icon}.svg" alt="">
+            <b>{title}</b>
+            <div>{value}</div>
+            <img src="/icons/right-line-arrow.svg" alt="">
+        </a>
+    </li>
+{/snippet}
+
+
 <Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
     "Software Developer",
     "Programmer",
@@ -63,46 +81,17 @@
 
                 <aside>
                     <ul>
-                        <li>
-                            <a href="mailto:{PUBLIC_CONTACT_EMAIL}" aria-label="Email Link">
-                                <img src="/icons/email.svg" alt="">
-                                <b>Email</b>
-                                <div>{PUBLIC_CONTACT_EMAIL}</div>
-                                <img src="/icons/right-line-arrow.svg" alt="">
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://github.com/{PUBLIC_GITHUB_USERNAME}" target="_blank" aria-label="Github Link">
-                                <img src="/icons/github.svg" alt="">
-                                <b>Github</b>
-                                <div>{PUBLIC_GITHUB_USERNAME}</div>
-                                <img src="/icons/right-line-arrow.svg" alt="">
-                            </a>
-                        </li>
-
+                        {@render details_card("email", `mailto:${PUBLIC_CONTACT_EMAIL}`, "Email", PUBLIC_CONTACT_EMAIL, "Email Link")}
+                        {@render details_card("github", `https://github.com/${PUBLIC_GITHUB_USERNAME}`, "Github", PUBLIC_GITHUB_USERNAME, "Github Link")}
+                        
                         {#if PUBLIC_LINKEDIN_USERNAME != "" && PUBLIC_LINKEDIN_USERNAME != undefined}
-                            <li>
-                                <a href="https://www.linkedin.com/in/{PUBLIC_LINKEDIN_USERNAME}" target="_blank" aria-label="Linkedin Link">
-                                    <img src="/icons/linkedin.svg" alt="">
-                                    <b>Linked In</b>
-                                    <div>{PUBLIC_LINKEDIN_USERNAME}</div>
-                                    <img src="/icons/right-line-arrow.svg" alt="">
-                                </a>
-                            </li>
+                            {@render details_card("linkedin", `https://www.linkedin.com/in/${PUBLIC_LINKEDIN_USERNAME}`, "Linked In", PUBLIC_LINKEDIN_USERNAME, "Linkedin Link")}
                         {/if}
                         
-                        <hr>
-                       
                         {#if PUBLIC_LOCATION_TEXT != "" && PUBLIC_LOCATION_URL != ""}
-                            <li>
-                                <a href={PUBLIC_LOCATION_URL} target="_blank" aria-label="Location in ">
-                                    <img src="/icons/based-location.svg" alt="">
-                                    <b>Located</b>
-                                    <div>{PUBLIC_LOCATION_TEXT}</div>
-                                    <img src="/icons/based-location.svg" alt="">
-                                </a>
-                            </li>
+                            <hr>
+                        
+                            {@render details_card("based-location", PUBLIC_LOCATION_URL, "Located", PUBLIC_LOCATION_TEXT, `Located in ${PUBLIC_LOCATION_TEXT}`)}
                         {/if}
                     </ul>
                 </aside>
