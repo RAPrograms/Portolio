@@ -22,7 +22,7 @@
 }
 
 @mixin fainted-button-tag(){
-    border: 1px solid color-mix(in hsl shorter hue, var(--primary-border-colour) 30%, transparent) ;
+    border: 1px solid color-mix(in hsl shorter hue, var(--primary-border-colour) 30%, transparent);
     background: rgba(242, 242, 242, 0.05);
     color: var(--primary-text-colour);
     align-self: flex-start;
@@ -33,4 +33,52 @@
     display: flex;
     padding: 10px;
     gap: 5px;
+}
+
+@mixin coloured-tag($colour: var(--primary-colour)){
+    background-color: color-mix(in hsl shorter hue, #{$colour} 10%, transparent);
+    border: 1px solid color-mix(in hsl shorter hue, #{$colour} 40%, transparent);
+    border-radius: 20px;
+    padding: 15px;
+    color: $colour;
+}
+
+@mixin glass-card(
+    $border-radius: 25px,
+    $padding: 20px,
+
+    $glow-colour: rgba(255, 255, 255, 0.961),
+    $glow-size: 10%,
+){
+    border: 1px solid rgba(117, 117, 117, 0.42);
+    background-color: rgba(242, 242, 242, 0.05);
+    border-radius: $border-radius;
+    backdrop-filter: blur(10px);
+    position: relative;
+    padding: $padding;
+
+    &::before {
+        $outline-darkend: color-mix(in hsl shorter hue, color-mix(in hsl shorter hue, #{$glow-colour} 60%, black), transparent 58%);
+
+        background: radial-gradient(
+            ellipse 250% 50% at top,
+            #{$glow-colour},
+            $outline-darkend #{$glow-size},
+            transparent calc(#{$glow-size} + 43%)
+        );
+        border-radius: inherit;
+        pointer-events: none;
+        position: absolute;
+        padding: 2px;
+        opacity: .75;
+        content: "";
+        inset: 0;
+        
+        /* Mask creates a transparent center so background shows through */
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+    }
 }

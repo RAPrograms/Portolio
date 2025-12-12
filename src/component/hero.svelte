@@ -150,6 +150,10 @@
             }
         }
 
+        & > .availability-tag{
+            @include coloured-tag(var(--primary-colour))
+        }
+
         & > .pulses{
             padding: 0 !important;
             margin: 0 !important;

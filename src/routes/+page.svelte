@@ -1,6 +1,8 @@
 <script>
     import HighlightCard from "../component/highlight-card.svelte";
     import Hero from "../component/hero.svelte";
+    import Form from "../component/form/form.svelte";
+    import FormField from "../component/form/form-field.svelte";
 </script>
 
 <Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
@@ -14,7 +16,7 @@
 
 <main id="main">
 
-    <section class="about">
+    <section id="about">
         <h2>About Me</h2>
         <p>
             Hi there, my name is Reece.
@@ -35,12 +37,21 @@
         </div>
     </section>
 
-    <section class="technology">
-        <header>
-            <h2>Skills & Tools</h2>
-            <p>Can you tell that I love to experiment?</p>
-        </header>
-    </section>
+    <div class="section-shape-wrapper">
+        <section id="contact">
+            <header>
+                <h2>Contact Me</h2>
+                <p>Let us create magic!</p>
+            </header>
+
+            <Form>
+                <FormField title="Name" name="name"/>
+                <FormField title="Email" name="email_address" type="email"/>
+                <FormField title="Subject" name="subject"/>
+                <FormField title="What's on your mind?" name="message" kind="textarea"/>
+            </Form>
+        </section>
+    </div>
 
 </main>
 
@@ -49,27 +60,62 @@
 
     main{
         flex-direction: column;
+        text-align: center;
         display: flex;
         gap: 50px;
 
-        & > section{
-            padding: 20px;
+        & > div.section-shape-wrapper{
+            $background-colour: #1B1B1B;
+
+            background-color: $background-colour;
+            position: relative;
+            padding: 20px 0;
+            margin: 70px 0;
+
+
+            &::before, &::after{
+                background-color: $background-colour;
+                position: absolute;
+                height: 50px;
+                width: 100%;
+                content: "";
+                left: 0;
+            }
+
+            &::before{
+                clip-path: polygon(0 0, 100% 100%, 0 100%);
+                bottom: 100%;
+            }
+
+            &::after{
+                clip-path: polygon(0 0, 100% 0, 100% 100%);
+                top: 100%;
+            }
+        }
+
+        & > section, & > div.section-shape-wrapper > section{
+            @include center_content();
+
+            gap: 20px;
+
+            &, & > header{
+                flex-direction: column;
+                align-items: center;
+                display: flex;
+            }
+
+            & > header{
+                gap: 15px;
+            }
+
+            & p{
+                font-size: 1.3rem;
+            }
         }
     }
 
-
-
-    section.about{
-        @include center_content();
-
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        display: flex;
-        gap: 20px;
-
+    section#about{
         & > p{
-            font-size: 1.3rem;
             width: 80%;
         }
 
@@ -89,29 +135,7 @@
         }
     }
 
-    section.technology{
-        background-color: #1B1B1B;
-        position: relative;
-        margin: 70px 0;
-        height: 500px;
-
-        &::before, &::after{
-            background-color: #1B1B1B;
-            content: "";
-            left: 0;
-            width: 100%;
-            position: absolute;
-            height: 50px;
-        }
-
-        &::before{
-            clip-path: polygon(0 0, 100% 100%, 0 100%);
-            bottom: 100%;
-        }
-
-        &::after{
-            clip-path: polygon(0 0, 100% 0, 100% 100%);
-            top: 100%;
-        }
+    section#contact{
+       
     }
 </style>
