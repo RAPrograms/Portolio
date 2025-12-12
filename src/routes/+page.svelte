@@ -82,14 +82,14 @@
                         </li>
 
                         {#if PUBLIC_LINKEDIN_USERNAME != "" && PUBLIC_LINKEDIN_USERNAME != undefined}
-                        <li>
-                            <a href="https://www.linkedin.com/in/{PUBLIC_LINKEDIN_USERNAME}" target="_blank" aria-label="Linkedin Link">
-                                <img src="/icons/linkedin.svg" alt="">
-                                <b>Linked In</b>
-                                <div>RAPrograms</div>
-                                <img src="/icons/right-line-arrow.svg" alt="">
-                            </a>
-                        </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/{PUBLIC_LINKEDIN_USERNAME}" target="_blank" aria-label="Linkedin Link">
+                                    <img src="/icons/linkedin.svg" alt="">
+                                    <b>Linked In</b>
+                                    <div>{PUBLIC_LINKEDIN_USERNAME}</div>
+                                    <img src="/icons/right-line-arrow.svg" alt="">
+                                </a>
+                            </li>
                         {/if}
                         
                         <hr>
