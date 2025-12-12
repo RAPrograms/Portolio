@@ -1,5 +1,8 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
+
+    import { PUBLIC_GITHUB_USERNAME } from '$env/static/public';
+
     import Typewritertext from "./typewritertext.svelte";
 
     const {
@@ -31,7 +34,7 @@
         <p class="flavor-text">$ {flavor_text}</p>
 
         <h1>
-            <div>reece@raprograms:~$</div>
+            <div>reece@{PUBLIC_GITHUB_USERNAME.toLowerCase()}:~$</div>
             <div>whoami</div>
         </h1>
 
