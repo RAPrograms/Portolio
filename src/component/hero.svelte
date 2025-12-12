@@ -117,9 +117,9 @@
             width: min-content;
 
             & > p.flavor-text{
+                font-size: clamp(.8rem,4vw,1.2rem);
                 line-height: 1.5rem;
                 margin-bottom: 20px;
-                font-size: clamp(.8rem,4vw,1.2rem);
                 color: #C76969;
             }
 

@@ -96,6 +96,7 @@
         & > section, & > div.section-shape-wrapper > section{
             @include center_content();
 
+            scroll-margin-top: calc(var(--nav-height) + 20px);
             gap: 20px;
 
             &, & > header{
