@@ -5,8 +5,9 @@
     import Hero from "../component/hero.svelte";
     
 	import {
+        PUBLIC_CONTACT_EMAIL,
         PUBLIC_GITHUB_USERNAME,
-        PUBLIC_CONTACT_EMAIL
+        PUBLIC_LINKEDIN_USERNAME,
     } from '$env/static/public';
 </script>
 
@@ -67,25 +68,31 @@
                                 <img src="/icons/right-line-arrow.svg" alt="">
                             </a>
                         </li>
+
                         <li>
-                            <a href="https://github.com/{PUBLIC_GITHUB_USERNAME}" aria-label="Email Link">
+                            <a href="https://github.com/{PUBLIC_GITHUB_USERNAME}" target="_blank" aria-label="Github Link">
                                 <img src="/icons/github.svg" alt="">
                                 <b>Github</b>
                                 <div>{PUBLIC_GITHUB_USERNAME}</div>
                                 <img src="/icons/right-line-arrow.svg" alt="">
                             </a>
                         </li>
-                        <li>
-                            <a href="reece@example.com" aria-label="Email Link">
-                                <img src="/icons/linkedin.svg" alt="">
-                                <b>Linked In</b>
-                                <div>RAPrograms</div>
-                                <img src="/icons/right-line-arrow.svg" alt="">
-                            </a>
-                        </li>
+
+                        {#if PUBLIC_LINKEDIN_USERNAME != "" && PUBLIC_LINKEDIN_USERNAME != undefined}
+                            <li>
+                                <a href="www.linkedin.com/in/{PUBLIC_LINKEDIN_USERNAME}" target="_blank" aria-label="Linkedin Link">
+                                    <img src="/icons/linkedin.svg" alt="">
+                                    <b>Linked In</b>
+                                    <div>RAPrograms</div>
+                                    <img src="/icons/right-line-arrow.svg" alt="">
+                                </a>
+                            </li>
+                        {/if}
+
                         <hr>
+
                         <li>
-                            <a href="reece@example.com" aria-label="Email Link">
+                            <a href="reece@example.com" aria-label="Location in ">
                                 <img src="/icons/based-location.svg" alt="">
                                 <b>Located</b>
                                 <div>Area</div>
