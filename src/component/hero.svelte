@@ -119,12 +119,12 @@
             & > p.flavor-text{
                 line-height: 1.5rem;
                 margin-bottom: 20px;
-                font-size: 1.2rem;
+                font-size: clamp(.8rem,4vw,1.2rem);
                 color: #C76969;
             }
 
             & > h1{
-                font-size: clamp(2rem,8vw,4rem);
+                font-size: clamp(.8rem,8vw,4rem);
                 word-break: keep-all;
                 margin-bottom: 10px;
                 text-align: center;
