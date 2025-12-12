@@ -27,9 +27,18 @@
         gap: 10px;
 
         & > button[type=submit]{
-            @include coloured-tag(rgb(0, 200, 0));
+            @include coloured-tag(var(--colour));
 
+            --colour: rgb(0, 200, 0);
+
+            transition: all ease-out 450ms;
             margin-top: 10px;
+
+            &:hover{
+                --colour: rgb(0, 116, 0);
+
+                transition: all ease-in 250ms;
+            }
         }
     }
 </style>
