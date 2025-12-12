@@ -19,7 +19,10 @@ const config = {
 		}),
 
 		prerender: {
-			handleMissingId: "warn"
+			handleMissingId: "warn",
+
+			//TODO: Enable link checking during build time
+			crawl: false
 		},
 
 		alias: {
