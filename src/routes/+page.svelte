@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
     import HighlightCard from "../component/highlight-card.svelte";
     import FormField from "../component/form/form-field.svelte";
     import Form from "../component/form/form.svelte";
     import Hero from "../component/hero.svelte";
-    import { onMount } from "svelte";
+    
+	import { PUBLIC_GITHUB_USERNAME } from '$env/static/public';
 </script>
 
 <Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
@@ -64,10 +65,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="https://github.com" aria-label="Email Link">
+                            <a href="https://github.com/{PUBLIC_GITHUB_USERNAME}" aria-label="Email Link">
                                 <img src="/icons/github.svg" alt="">
                                 <b>Github</b>
-                                <div>RAPrograms</div>
+                                <div>{PUBLIC_GITHUB_USERNAME}</div>
                                 <img src="/icons/right-line-arrow.svg" alt="">
                             </a>
                         </li>
