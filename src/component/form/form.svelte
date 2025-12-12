@@ -17,6 +17,12 @@
 >
     {@render children()}
 
+    <!-- Honey Pot -->
+    <label>
+        <div>Don't fill this field out</div>
+        <input type="text" name="additional_infomation" required tabindex="-1" autocomplete="off">
+    </label>
+
     <button type="submit">Submit</button>
 </form>
 
@@ -29,6 +35,11 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+
+        & > label{
+            overflow: hidden;
+            height: 0px
+        }
 
         & > button[type=submit]{
             @include coloured-tag(var(--colour));
