@@ -36,6 +36,8 @@ jobs:
 
           PUBLIC_LOCATION_TEXT: ${{ vars.LOCATION_TEXT || '' }}
           PUBLIC_LOCATION_URL: ${{ vars.LOCATION_URL || '' }}
+
+          PUBLIC_BOTPOISON_Key: ${{ vars.BOTPOISON_KEY }}
           
 
       - name: Upload artifact

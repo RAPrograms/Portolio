@@ -1,16 +1,20 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
 
-    const { children } : { children: Snippet } = $props()
+    import { PUBLIC_BOTPOISON_Key } from '$env/static/public';
 
-    function submit(e){
-        e.preventDefault()
-
-        console.log(e.target)
-    }
+    const { children, url } : { children: Snippet, url: string } = $props()
 </script>
 
-<form onsubmit={submit}>
+<svelte:head>
+    <script src="https://unpkg.com/@botpoison/browser" async></script>
+</svelte:head>
+
+<form
+    method="POST"
+    action={url}
+    data-botpoison-public-key={PUBLIC_BOTPOISON_Key}
+>
     {@render children()}
 
     <button type="submit">Submit</button>

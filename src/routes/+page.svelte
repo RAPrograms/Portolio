@@ -72,7 +72,7 @@
             </header>
 
             <div>
-                <Form>
+                <Form url="https://submit-form.com/c5LGk94Ui">
                     <FormField title="Name" name="name"/>
                     <FormField title="Email" name="email_address" type="email"/>
                     <FormField title="Subject" name="subject"/>
