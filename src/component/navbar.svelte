@@ -1,3 +1,7 @@
+<svelte:head>
+    <link rel="prefetch" href="/logos/primary.svg" />
+</svelte:head>
+
 <a class="accessibility-skip" href="#main">Skip to content</a>
 
 <header>
