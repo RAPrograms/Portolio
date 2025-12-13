@@ -27,14 +27,14 @@
 	<meta property="og:url" content="https://raprograms.co.uk" />
 	<meta property="og:title" content="RAPrograms" />
 	<meta property="og:description" content={description} />
-	<meta property="og:image" content="/thumbnail.svg" />
+	<meta property="og:image" content="/thumbnail.png" />
 
 	<!-- X (Twitter) -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:url" content="https://raprograms.co.uk" />
 	<meta property="twitter:title" content="RAPrograms" />
 	<meta property="twitter:description" content={description} />
-	<meta property="twitter:image" content="/thumbnail.svg" />
+	<meta property="twitter:image" content="/thumbnail.png" />
 </svelte:head>
 
 <div>
