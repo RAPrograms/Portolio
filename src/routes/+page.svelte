@@ -96,8 +96,6 @@
                         {/if}
                         
                         {#if PUBLIC_LOCATION_TEXT != "" && PUBLIC_LOCATION_URL != ""}
-                            <hr>
-                        
                             {@render details_card("based-location", PUBLIC_LOCATION_URL, "Located", PUBLIC_LOCATION_TEXT, `Located in ${PUBLIC_LOCATION_TEXT}`)}
                         {/if}
                     </ul>
