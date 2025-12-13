@@ -3,7 +3,7 @@
 <header>
     <nav>
         <a href="/">
-            <img src="/logos/primary.svg" alt="RAPrograms Logo">
+            <img src="/logos/primary.svg" width="79" height="20" alt="RAPrograms Logo">
         </a>
 
         <!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
