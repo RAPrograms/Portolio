@@ -8,6 +8,9 @@
 
 <svelte:head>
 	<meta name="author" content="Reece">
+
+	<link rel="preconnect" href="/fonts/spacegrotesk/spacegrotesk.woff2">
+	<link rel="preconnect" href="/fonts/jetbrainsmono/jetbrainsmono.woff2">
 </svelte:head>
 
 <div>
