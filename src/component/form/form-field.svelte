@@ -11,7 +11,7 @@
         title: string
         name: string,
         type: HTMLInputTypeAttribute,
-        kind: "input"
+        kind: "input" | "textarea",
         required: boolean
     } = $props()
 </script>

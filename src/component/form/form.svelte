@@ -15,7 +15,7 @@
     action={url}
     data-botpoison-public-key={PUBLIC_BOTPOISON_Key}
 >
-    {@render children()}
+    {@render children?.()}
 
     <!-- Honey Pot -->
     <label>
