@@ -14,13 +14,6 @@
     } from '$env/static/public';
 </script>
 
-<svelte:head>
-    <title>RAPrograms</title>
-
-    <meta name="description" content="Personal portfolio of Reece, a software developer passionate about hardware, backend, frontend, cybersecurity, and creating innovative technology.">
-	<meta name="keywords" content="back-end, front-end, mechanics, cybersecurity, digital software, software, web development, systems, application development, development, web,">
-</svelte:head>
-
 {#snippet details_card(
     icon: string,
     link: string,
