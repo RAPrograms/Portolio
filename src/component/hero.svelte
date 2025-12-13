@@ -54,7 +54,7 @@
     {/if}
 
     <a href="#main">
-        <img src="/icons/circled-down-arrow.svg" alt="Continue to main content">
+        <img src="/icons/circled-down-arrow.svg" width="42" height="42" alt="Continue to main content">
     </a>
 
     <div class="pulses"></div>

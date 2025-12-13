@@ -7,8 +7,10 @@
 </script>
 
 <svelte:head>
-	<link rel="preload" href="/fonts/spacegrotesk/spacegrotesk.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/fonts/spacegrotesk/spacegrotesk.woff" as="font" type="font/woff2">
+	<meta name="author" content="Reece">
+
+	<link rel="preconnect" href="/fonts/spacegrotesk/spacegrotesk.woff2">
+	<link rel="preconnect" href="/fonts/jetbrainsmono/jetbrainsmono.woff2">
 </svelte:head>
 
 <div>

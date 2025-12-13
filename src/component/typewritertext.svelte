@@ -42,6 +42,7 @@
                 animation: typing 4s;
                 margin-inline: auto;
                 white-space: nowrap;
+                will-change: width;
                 overflow: hidden;
                 left: 0;
 

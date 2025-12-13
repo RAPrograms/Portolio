@@ -31,20 +31,20 @@ html{
 }
 
 body{
-    font-family: Space Grotesk, system-ui, sans-serif;
+    font-family: "Space Grotesk", system-ui, sans-serif;
     background-color: var(--background-colour);
     min-height: 100vh;
     padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6{
-    font-family: JetBrains Mono, Consolas, Monaco, monospace;
+    font-family: "JetBrains Mono", monospace;
     margin: 0;
 }
 
 h2{
+    color: var(--primary-colour);
     font-size: 1.25rem;
-    color: var(--primary-colour)
 }
 
 p{
