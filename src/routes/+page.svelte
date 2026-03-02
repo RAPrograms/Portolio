@@ -166,7 +166,7 @@
 
         & > .highlights{
             justify-content: center;
-            align-items: center;
+            align-items: stretch;
             margin-top: 40px;
             flex-wrap: wrap;
             display: flex;
@@ -174,7 +174,6 @@
 
             & > :global(article){
                 max-width: 350px;
-                height: 100%;
                 flex-grow: 1;
             }
         }
