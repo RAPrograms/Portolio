@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
 
-    import { PUBLIC_BOTPOISON_Key } from '$env/static/public';
+    import { PUBLIC_BOTPOISON_KEY } from '$env/static/public';
 
     const { children, url } : { children: Snippet, url: string } = $props()
 </script>
@@ -13,7 +13,7 @@
 <form
     method="POST"
     action={url}
-    data-botpoison-public-key={PUBLIC_BOTPOISON_Key}
+    data-botpoison-public-key={PUBLIC_BOTPOISON_KEY}
 >
     {@render children?.()}
 
