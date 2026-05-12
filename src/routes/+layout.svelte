@@ -48,7 +48,7 @@
 </div>
 
 <style lang="scss">
-	:global(body > div){
+	:global(body > div > div){
 		flex-direction: column;
 		min-height: 100vh;
 		display: flex;
