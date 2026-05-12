@@ -1,6 +1,7 @@
 <script lang="ts">
-    import HighlightCard from "../component/highlight-card.svelte";
-    import Hero from "../component/hero.svelte";
+    import HighlightCard from "$components/highlight-card.svelte";
+    import ProjectCard from "$components/project-card.svelte";
+    import Hero from "$components/hero.svelte";
 
     import ContactSection from "$sections/contact.svelte"
     
@@ -38,6 +39,30 @@
             <HighlightCard icon="code" title="Student of the Year">
                 Recognised as Student of the Year 2024 for excellence.
             </HighlightCard>
+        </div>
+    </section>
+
+    <div class="section-shape-wrapper">
+        <section id="knowlege">
+            <header>
+                <h2>Skills & Tools</h2>
+                <p>Can you tell I love to experement</p>
+            </header>
+
+            <div>
+                <!-- TODO -->
+            </div>
+        </section>
+    </div>
+
+    <section id="featured-projects">
+        <header>
+            <h2>Featured Projects</h2>
+            <p>Here are some of my favorite projects</p>
+        </header>
+
+        <div>
+            <ProjectCard></ProjectCard>
         </div>
     </section>
 

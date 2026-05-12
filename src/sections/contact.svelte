@@ -1,8 +1,8 @@
 <script lang="ts">
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
 
-    import FormField from "../component/form/form-field.svelte";
-    import Form from "../component/form/form.svelte";
+    import FormField from "$components/form/form-field.svelte";
+    import Form from "$components/form/form.svelte";
 
     import {
         PUBLIC_CONTACT_EMAIL,
