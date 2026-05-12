@@ -125,7 +125,9 @@
                     }
 
                     & > :global(svg):last-child{
+                        aspect-ratio: 1/1;
                         grid-area: Arrow;
+                        width: 24px;
                     }
                 }
             }

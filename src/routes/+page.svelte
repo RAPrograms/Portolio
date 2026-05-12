@@ -1,6 +1,6 @@
 <script lang="ts">
+    import ProjectCard from "$components/featured-project-card.svelte";
     import HighlightCard from "$components/highlight-card.svelte";
-    import ProjectCard from "$components/project-card.svelte";
     import Hero from "$components/hero.svelte";
 
     import ContactSection from "$sections/contact.svelte"
