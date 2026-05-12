@@ -28,6 +28,7 @@ const config = {
 		alias: {
 			"$styling/*": "/src/styling",
 			"$icons/*": "/src/assets/icons",
+			"$sections/*": "/src/sections/",
 			"$lib/*": "/src/lib/",
 		}
 	}
