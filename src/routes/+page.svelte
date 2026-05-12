@@ -4,6 +4,7 @@
     import Form from "../component/form/form.svelte";
     import Hero from "../component/hero.svelte";
     
+    import { get_project_avalibility } from "$lib";
 	import {
         PUBLIC_CONTACT_EMAIL,
         PUBLIC_GITHUB_USERNAME,
@@ -37,7 +38,9 @@
     "Programmer",
     "Gamer",
     "Coder"
-]}>
+]}
+availability_notice={get_project_avalibility()}
+return_btn={false}>
     Passionate about creating digital software with expertise in <span>web development</span>, <span>back-end systems</span>, and <span>application development</span>.
 </Hero>
 

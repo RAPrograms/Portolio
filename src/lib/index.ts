@@ -1,1 +1,11 @@
-// place files you want to import through the `$lib` alias in this folder.
+import { PUBLIC_AVAILABILITY } from '$env/static/public';
+
+export function get_project_avalibility(){
+    return [
+        "true",
+        "yes",
+        "y"
+    ].includes(
+        PUBLIC_AVAILABILITY.toLowerCase()
+    )
+}
