@@ -1,9 +1,9 @@
 <script lang="ts">
-    import ProjectCard from "$components/featured-project-card.svelte";
     import HighlightCard from "$components/highlight-card.svelte";
     import Hero from "$components/hero.svelte";
 
     import ContactSection from "$sections/contact.svelte"
+    import ProjectsSection from "$sections/featured_projects.svelte"
     
     import { get_project_avalibility } from "$lib";
 </script>
@@ -55,16 +55,7 @@
         </section>
     </div>
 
-    <section id="featured-projects">
-        <header>
-            <h2>Featured Projects</h2>
-            <p>Here are some of my favorite projects</p>
-        </header>
-
-        <div>
-            <ProjectCard></ProjectCard>
-        </div>
-    </section>
+    <ProjectsSection/>
 
     <div class="section-shape-wrapper">
         <ContactSection/>
