@@ -32,6 +32,7 @@ html{
 
 body{
     font-family: "Space Grotesk", system-ui, sans-serif;
+    scroll-padding-top: calc(var(--nav-height) + 3px);
     background-color: var(--background-colour);
     min-height: 100vh;
     padding: 0;

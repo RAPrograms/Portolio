@@ -1,3 +1,15 @@
+<script lang="ts">
+    import { afterNavigate } from "$app/navigation";
+
+    let menu_expanded = $state(false)
+
+    afterNavigate(() => menu_expanded = false)
+
+    function handleLinkPress(){
+        menu_expanded = false
+    }
+</script>
+
 <svelte:head>
     <link rel="prefetch" href="/logos/primary.svg" />
 </svelte:head>
@@ -12,22 +24,20 @@
 
         <!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
         <label class="menu-btn" role="menu" aria-label="Menu">
-            <input type="checkbox">
+            <input type="checkbox" bind:checked={menu_expanded}>
         </label>
 
         <ul class="links">
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#technology">Technology</a>
-            </li>
-            <li>
-                <a href="#projects">Projects</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
+            {#each [
+                {name: "About", url: "/#about"},
+                {name: "Technology", url: "/#technology"},
+                {name: "Projects", url: "/projects"},
+                {name: "Contact", url: "/#contact"},
+            ] as {name, url}}
+                <li>
+                    <a href={url} onclick={handleLinkPress}>{name}</a>
+                </li>
+            {/each}
         </ul>
     </nav>
 </header>
