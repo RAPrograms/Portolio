@@ -60,8 +60,8 @@
         height: var(--nav-height);
         position: sticky;
         display: block;
-        left: 0;
         z-index: 5;
+        left: 0;
         top: 0;
 
         & > nav{
