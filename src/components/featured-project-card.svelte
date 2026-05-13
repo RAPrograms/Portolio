@@ -4,23 +4,32 @@
 
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
 
+    export type Themes = 
+        "Deep Forest" | 
+        "Midnight Nebula" |
+        "Ocean Trench" |
+        "Desert Dusk" |
+        "Arctic Berry"
+
     const {
         title,
-        children,                 // The description text (provided within the component tags)
+        children,                  // The description text (provided within the component tags)
         tags,        
         
-        preview_size = "desktop", // The device type the preview image is
-        preview_img,              // A image string
-        caption,                  // The text on the preview card
+        preview_size = "desktop",  // The device type the preview image is
+        preview_img,               // A image string
+        preview_theme,             // The theme used for the text colour and background gradient
+        caption,                   // The text on the preview card
         
-        demo_url,                 // The URL to the live demo
-        repo_url,                 // The optional url to the git repo
+        demo_url,                  // The URL to the live demo
+        repo_url,                  // The optional url to the git repo
     }:{
         title: string,
         children: Snippet,
         tags: Array<Stack | ProjectType>,
         preview_size: "desktop" | "mobile",
         preview_img: string,
+        preview_theme: Themes,
         caption: string,
         demo_url?: string,
         repo_url?: string
@@ -45,6 +54,7 @@
 <article>
     <div class="preview-containor">
         <svelte:element
+            data-theme={preview_theme}
             class="preview"
             target="_blank"
             this={(demo_url)? "a" : "article"}
@@ -95,6 +105,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
+        margin: 20px 0;
 
         @media (width <= $breakpoint) {
             flex-direction: column-reverse;
@@ -109,7 +120,36 @@
             }
 
             .preview{
-                background: linear-gradient(188deg,rgba(8, 57, 38, 1) 30%, rgba(5, 150, 105, 1) 68%, rgba(52, 211, 153, 1) 90%, rgba(249, 215, 147, 1) 100%);
+                // Defining preview themes
+                &[data-theme="Deep Forest"]{
+                    --colour: #00D492; 
+                    --gradient: linear-gradient(188deg,rgba(8, 57, 38, 1) 30%, rgba(5, 150, 105, 1) 68%, rgba(52, 211, 153, 1) 90%, rgba(249, 215, 147, 1) 100%);
+                }
+
+                &[data-theme="Midnight Nebula"]{
+                    --colour: rgba(139, 92, 246, 1); 
+                    --gradient: linear-gradient(188deg, rgba(15, 23, 42, 1) 30%, rgba(88, 28, 135, 1) 68%, rgba(139, 92, 246, 1) 90%, rgba(244, 114, 182, 1) 100%);
+                }
+
+                &[data-theme="Ocean Trench"]{
+                    --colour: rgba(56, 189, 248, 1); 
+                    --gradient: linear-gradient(188deg, rgba(8, 47, 73, 1) 30%, rgba(3, 105, 161, 1) 68%, rgba(56, 189, 248, 1) 90%, rgba(186, 230, 253, 1) 100%);
+                }
+
+                &[data-theme="Desert Dusk"]{
+                    --colour: rgba(249, 115, 22, 1); 
+                    --gradient: linear-gradient(188deg, rgba(67, 20, 7, 1) 30%, rgba(154, 52, 18, 1) 68%, rgba(249, 115, 22, 1) 90%, rgba(253, 186, 116, 1) 100%);
+                }
+
+                &[data-theme="Arctic Berry"]{
+                    --colour: rgba(45, 212, 191, 1); 
+                    --gradient: linear-gradient(188deg, rgba(31, 41, 55, 1) 30%, rgba(13, 148, 136, 1) 68%, rgba(45, 212, 191, 1) 90%, rgba(251, 207, 232, 1) 100%);
+                }
+
+                // Main preview styling
+                --padding: 20px;
+
+                background: var(--gradient);
                 grid-template-columns: 1fr min-content; 
                 grid-template-rows: max-content 1fr; 
                 container-type: inline-size;
@@ -118,7 +158,7 @@
                 aspect-ratio: 16 / 10;
                 border-radius: 25px;
                 overflow: hidden;
-                padding: 20px;
+                padding: var(--padding);
                 display: grid; 
                 gap: 20px 5px; 
                 grid-template-areas: 
@@ -137,9 +177,9 @@
 
                 //Caption
                 & > span{
+                    color: var(--colour);
                     padding-left: 1.8cqw;
                     grid-area: Caption;
-                    color: #00D492;
                     text-align: left;
                     font-size: 4cqw;
 
@@ -153,7 +193,7 @@
                 & > .icon{
                     place-items: center;
                     margin-right: 4cqw;
-                    color: #00D492;
+                    color: var(--colour);
                     display: grid;
 
                     & > :global(svg){
@@ -163,10 +203,14 @@
                 
                 // Preview styling
                 & > img{
+                    bottom: calc(var(--padding) * -1);
                     transition: 200ms ease-in all;
                     border-radius: 10px;
+                    position: absolute;
                     grid-area: Preview;
+                    translate: -50% 0;
                     margin: auto;
+                    left: 50%;
 
                     &[data-preview-type=desktop]{ width: 95%; }
                     &[data-preview-type=mobile]{ width: 23%; }
@@ -174,8 +218,8 @@
 
                 // Preview image positioning
                 &:not(:is(:focus, :focus-within, :hover)) > img{
+                    translate: -50% 20%;
                     rotate: -5.9deg;
-                    translate: 0 20%;
                     opacity: .8;
                 }
             }
@@ -195,9 +239,9 @@
             }
 
             @media (width <= $breakpoint) {
-                width: 90%;
-                text-align: center;
                 align-items: center;
+                text-align: center;
+                width: 90%;
             }
 
 
@@ -215,6 +259,10 @@
                 flex-wrap: wrap;
                 display: flex;
                 gap: 10px;
+
+                @media (width <= $breakpoint) {
+                    justify-content: center;
+                }
 
                 & > a{
                     outline: 1px solid rgba(117, 117, 117, .45);
