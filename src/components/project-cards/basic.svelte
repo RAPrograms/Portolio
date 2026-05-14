@@ -1,35 +1,36 @@
-<script>
+<script lang="ts">
     import GithubIcon from "$icons/github.svg?raw"
     import EyeIcon from "$icons/eye.svg?raw"
 
     import Tag from "../tag.svelte";
 
+    const { data }:{ data: Project } = $props()
 </script>
 
 <article>
-    <div class="image-containor" style="--image-uri: url('https://placeimg.dev/1600x900/4F46E5')">
-        <img src="https://placeimg.dev/1600x900/4F46E5" alt="">
+    <div class="image-containor" style="--image-uri: url('{data.image_uri}')">
+        <img src={data.image_uri} alt="Project Preview" loading="lazy">
     </div>
 
-    <h3>Project Title</h3>
+    <h3>{data.title}</h3>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor quisquam adipiscing dolores voluptatem totam duis consectetur unde. Cons</p>
+    <p>{data.description}</p>
 
     <div class="tags">
-        {#each ["Svelte", "Svelte", "Svelte", "Svelte"] as tag}
+        {#each data.tags as tag}
             <Tag size="small" isProjectsLink={false} value={tag}/>
         {/each}
     </div>
 
     <div class="links">
-        <a href="" target="_blank">
+        <a href={data.repository_url} target="_blank">
             {@html GithubIcon}
             Code
         </a>
 
         <div class="seperator"></div>
 
-        <a href="" target="_blank">
+        <a href={data.demo_url} target="_blank">
             {@html EyeIcon}
             Demo
         </a>
@@ -42,7 +43,7 @@
         background-color: rgba(242, 242, 242, .0471);
         flex-direction: column;
         border-radius: 20px;
-        max-width: 300px;
+        max-width: 460px;
         display: flex;
         padding: 10px;
         gap: 20px;
@@ -109,10 +110,17 @@
             }
 
             a{
-                display: flex;
                 align-items: center;
-                gap: 10px;
                 color: white;
+                display: flex;
+                gap: 10px;
+
+                &[href=""], &:not([href]){
+                    pointer-events: none;
+                    cursor: unset;
+                    color: grey;
+                    opacity: .6;
+                }
             }
         }
     }

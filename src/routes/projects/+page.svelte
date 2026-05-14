@@ -1,7 +1,10 @@
 <script lang="ts">
-    import ProjectCard from "../../components/project-cards/basic.svelte";
-    import Hero from "../../components/hero.svelte";
+    import type { PageProps } from "../$types";
 
+    import ProjectCard from "../../components/project-cards/basic.svelte";
+    import Hero from "../../components/layout/hero.svelte";
+
+    let { data }: PageProps = $props();
 </script>
 
 <Hero title="Skills & Tech" flavorText="Think && Design && Create && Repeat" backURL="/">
@@ -9,11 +12,9 @@
 </Hero>
 
 <main id="main">
-    <ProjectCard/>
-    <ProjectCard/>
-    <ProjectCard/>
-    <ProjectCard/>
-    <ProjectCard/>
+    {#each (data as {records: Project[]})["records"] as projectData}
+        <ProjectCard data={projectData}/>
+    {/each}
 </main>
 
 <style lang="scss">
@@ -21,10 +22,5 @@
         grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
         display: grid;
         gap: 20px;  
-
-        & > :global(article){
-            max-width: none;
-            width: 100%;
-        }
     }
 </style>
