@@ -1,7 +1,7 @@
 <script lang="ts">
     import Typewritertext from "../components/typewritertext.svelte";
     import HighlightCard from "../components/highlight-card.svelte";
-    import Hero from "../components/hero.svelte";
+    import Hero from "../components/layout/hero.svelte";
 
     import ContactSection from "../sections/contact.svelte"
     import ProjectsSection from "../sections/featured_projects.svelte"
@@ -77,9 +77,9 @@
     @use "$styling/_variables.scss" as *;
 
     main{
+        max-width: none !important;
         flex-direction: column;
         text-align: center;
-        max-width: none !important;
         display: flex;
         gap: 50px;
 
