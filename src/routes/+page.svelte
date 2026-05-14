@@ -1,22 +1,33 @@
 <script lang="ts">
-    import HighlightCard from "$components/highlight-card.svelte";
-    import Hero from "$components/hero.svelte";
+    import Typewritertext from "../components/typewritertext.svelte";
+    import HighlightCard from "../components/highlight-card.svelte";
+    import Hero from "../components/hero.svelte";
 
-    import ContactSection from "$sections/contact.svelte"
-    import ProjectsSection from "$sections/featured_projects.svelte"
+    import ContactSection from "../sections/contact.svelte"
+    import ProjectsSection from "../sections/featured_projects.svelte"
     
     import { get_project_avalibility } from "$lib";
 </script>
 
-<Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
-        "Software Developer",
-        "Programmer",
-        "Gamer",
-        "Coder"
-    ]}
-    availability_notice={get_project_avalibility()}
-    return_btn={false}>
-    Passionate about creating digital software with expertise in <span>web development</span>, <span>back-end systems</span>, and <span>application development</span>.
+{#snippet avalibilityNotice()}
+    {#if get_project_avalibility()}
+        <div class="hero-availability-tag">Available for projects</div>
+    {/if}
+{/snippet}
+
+<Hero title="whoami" flavorText="Sleep && Eat && Game && Code" notice={avalibilityNotice}>
+    <div class="hero-attributes">
+        <Typewritertext lines={[
+            "Software Developer",
+            "Programmer",
+            "Gamer",
+            "Coder"
+        ]}/>
+    </div>
+
+    <p class="hero-description">
+        Passionate about creating digital software with expertise in <span>web development</span>, <span>back-end systems</span>, and <span>application development</span>.
+    </p>
 </Hero>
 
 <main id="main">
@@ -120,6 +131,17 @@
                 font-size: 1.3rem;
             }
         }
+    }
+
+    /* Additional Hero Styling */
+    .hero-description{
+        font-size: clamp(0.9rem,3vw,1.3rem);
+        color: var(--secondary-text-colour);
+        margin-top: 30px;
+    }
+
+    .hero-availability-tag{
+        @include coloured-tag(var(--primary-colour));
     }
 
     section#about{
