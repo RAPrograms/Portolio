@@ -38,6 +38,11 @@ body{
     padding: 0;
 }
 
+main#main{
+    max-width: var(--max-content-width);
+    margin: auto;
+}
+
 h1, h2, h3, h4, h5, h6{
     font-family: "JetBrains Mono", monospace;
     margin: 0;

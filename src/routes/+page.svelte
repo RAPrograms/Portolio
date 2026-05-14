@@ -79,6 +79,7 @@
     main{
         flex-direction: column;
         text-align: center;
+        max-width: none !important;
         display: flex;
         gap: 50px;
 
