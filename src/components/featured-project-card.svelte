@@ -3,6 +3,7 @@
     import type { Snippet } from "svelte";
 
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
+    import GithubIcon from "$icons/github.svg?raw"
 
     export type Themes = 
         "Deep Forest" | 
@@ -75,7 +76,7 @@
             <span>{title}</span>
             {#if repo_url}
                 <a href="{repo_url}" target="_blank">
-                    <img src="/icons/github.svg" alt="Visit Github Repository">
+                    {@html GithubIcon}
                 </a>
             {/if}
         </h3>
@@ -249,6 +250,10 @@
                 align-items: center;
                 display: flex;
                 gap: 20px;
+
+                :global(svg){
+                    color: white;
+                }
             }
 
             p {
