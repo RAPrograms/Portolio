@@ -1,7 +1,4 @@
 <script lang="ts">
-    import GithubIcon from "$icons/github.svg?raw"
-    import EyeIcon from "$icons/eye.svg?raw"
-
     import Tag from "../tag.svelte";
 
     const { data }:{ data: Project } = $props()
@@ -24,14 +21,14 @@
 
     <div class="links">
         <a href={data.repository_url} target="_blank">
-            {@html GithubIcon}
+            <svg width="24" height="24" viewBox="0 0 24 24"><use href="#github-icon"/></svg>
             Code
         </a>
 
         <div class="seperator"></div>
 
         <a href={data.demo_url} target="_blank">
-            {@html EyeIcon}
+            <svg width="24" height="24" viewBox="0 0 24 24"><use href="#eye-icon"/></svg>
             Demo
         </a>
     </div>
