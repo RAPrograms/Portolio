@@ -7,7 +7,9 @@
 </script>
 
 <article>
-    <img src="https://placeimg.dev/1600x900/4F46E5" alt="">
+    <div class="image-containor" style="--image-uri: url('https://placeimg.dev/1600x900/4F46E5')">
+        <img src="https://placeimg.dev/1600x900/4F46E5" alt="">
+    </div>
 
     <h3>Project Title</h3>
 
@@ -45,18 +47,44 @@
         padding: 10px;
         gap: 20px;
 
-        & > :not(img){
+        .image-containor{
+            justify-content: center;
+            border-radius: 10px;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            display: flex;
+
+            &::before{
+                filter: grayscale(100%) blur(3px);
+                background-image: var(--image-uri);
+                background-position: center;
+                background-size: cover;
+                position: absolute;
+                height: 100%;
+                content: "";
+                width: 100%;
+                z-index: -1;
+                scale: 1.1;
+            }
+
+            img{
+                object-fit: contain;
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+
+        & > :not(:first-child){
             padding: 0 10px;
         }
 
-        & > img{
-            border-radius: 10px;
-        }
 
         & > .tags{
-            display: flex;
-            gap: 10px;
             flex-wrap: wrap;
+            display: flex;
+            flex-grow: 1;
+            gap: 10px;
 
             & > :global(.tag) > :global(img){
                 height: 10px;
