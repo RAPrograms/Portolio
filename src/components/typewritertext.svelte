@@ -25,8 +25,8 @@
 <style lang="scss">
     .typewriter {
         font-family: monospace;
-        font-size: 1.5rem;
         display: inline-flex;
+        font-size: 1.5rem;
         padding: 0 5px;
 
         & > div{
@@ -38,7 +38,8 @@
                 opacity: 0;
             }
 
-            & >  p {
+            & > p {
+                color: var(--primary-text-colour);
                 animation: typing 4s;
                 margin-inline: auto;
                 white-space: nowrap;

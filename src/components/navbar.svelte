@@ -82,9 +82,7 @@
             display: flex;
             height: 100%;
 
-            & *{
-                @extend .no-select;
-            }
+            *{ @extend %no-select }
 
             & > label.menu-btn{
                 @media (width <= $Mobile-Breakpoint) {

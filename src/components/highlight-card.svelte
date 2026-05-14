@@ -33,7 +33,6 @@
 <style lang="scss">
     article {
         background: linear-gradient(-210deg, color-mix(in hsl shorter hue, var(--primary-colour) 60%, transparent), #242931 30%);
-        color: var(--secondary-text-colour);
         flex-direction: column;
         border-radius: 12px;
         position: relative;
