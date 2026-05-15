@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { PageProps } from "../$types";
 
-    import javascriptAvalible from "../../lib/availability"
     import { ProjectTypes } from "../../lib/enums";
 
     import ProjectCard from "../../components/project-cards/basic.svelte";
@@ -57,22 +56,20 @@
     <p>You can never have enough technology</p>
 </Hero>
 
-{#if javascriptAvalible}
-    <header>
-        <label>
-            {@html SearchIcon}
-            <input type="search" bind:value={query_filter}>
-        </label>
+<header class="require-javascript">
+    <label>
+        {@html SearchIcon}
+        <input type="search" bind:value={query_filter}>
+    </label>
 
-        <select name="project-type" bind:value={type_filter}>
-            <option value="" selected>All Projects</option>
+    <select name="project-type" bind:value={type_filter}>
+        <option value="" selected>All Projects</option>
 
-            {#each Object.entries(ProjectTypes) as [key, value]}
-                <option value={key}>{value}</option>
-            {/each}
-        </select>
-    </header>
-{/if}
+        {#each Object.entries(ProjectTypes) as [key, value]}
+            <option value={key}>{value}</option>
+        {/each}
+    </select>
+</header>
 
 <main id="main">
     {#each matches as projectData}
@@ -119,11 +116,11 @@
             gap: 5px;
 
             input{
+                background: none;
+                outline: none;
                 height: 100%;
                 flex-grow: 1;
                 border: none;
-                outline: none;
-                background: none;
             }
         }
     }
@@ -132,5 +129,9 @@
         grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
         display: grid;
         gap: 20px;  
+
+        & > :global(article){
+            margin: auto;
+        }
     }
 </style>

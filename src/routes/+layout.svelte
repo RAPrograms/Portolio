@@ -38,6 +38,16 @@
 	<meta property="twitter:image" content="/thumbnail.png" />
 </svelte:head>
 
+<noscript>
+	<!-- Hides elements which require javascript to function-->
+	<style>
+		.require-javascript{
+			visibility: none !important;
+			display: none !important;
+		}
+	</style>
+</noscript>
+
 <div>
 	<Navbar/>
 
