@@ -83,6 +83,8 @@
                 />
             {/each}
         </div>
+
+        <a class="additional-resources" href="/projects#main">See more projects</a>
     </section>
 
     <div class="section-shape-wrapper">
@@ -154,6 +156,28 @@
 
         section{
             width: 100%;
+
+            & > a.additional-resources:last-child{
+                align-items: center;
+                margin-top: 20px;
+                font-size: large;
+                display: flex;
+                color: white;
+                gap: 5px;
+
+                &::after{
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-color: #2F2F2F;
+                    background-size: 14px;
+                    display: inline-block;
+                    border-radius: 50%;
+                    height: 20px;
+                    width: 20px;
+                    content: "";
+                }
+            }
         }
     }
 

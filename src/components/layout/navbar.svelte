@@ -5,8 +5,6 @@
 
     afterNavigate(() => menu_expanded = false)
 
-    const page_affix = (import.meta.env.PROD)? '.html':''
-
     function handleLinkPress(){
         menu_expanded = false
     }
@@ -33,7 +31,7 @@
             {#each [
                 {name: "About", url: "/#about"},
                 {name: "Technology", url: "/#technology"},
-                {name: "Projects", url: "/projects" + page_affix},
+                {name: "Projects", url: "/projects"},
                 {name: "Contact", url: "/#contact"},
             ] as {name, url}}
                 <li>
