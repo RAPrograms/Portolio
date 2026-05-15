@@ -41,6 +41,7 @@ jobs:
         run: bun ./db/seed_repositories.ts
         env:
           GITHUB_USERNAME: ${{ github.repository_owner }}
+          FEATURED_PROJECTS: ${{ vars.FEATURED_PROJECTS }}
 
 
       - name: Build
