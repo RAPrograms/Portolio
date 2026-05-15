@@ -25,7 +25,7 @@ jobs:
         uses: oven-sh/setup-bun@v1
 
       - name: Create sqlite database
-        run: sqlite3 ./db/database.db < ./db/setup.sql
+        run: sqlite3 ./db/data.db < ./db/setup.sql
 
       # Exports all public Github repos, from owner, into a JSON file
       - name: Fetch repositories details
