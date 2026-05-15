@@ -1,5 +1,12 @@
--- Purge existing tables --
+-- Disable foreign key constraints
+PRAGMA foreign_keys = OFF;
+
+-- Drop child table first, then parent
+DROP TABLE IF EXISTS featured_projects;
 DROP TABLE IF EXISTS projects;
+
+-- Re-enable constraints
+PRAGMA foreign_keys = ON;
 
 
 -- Create tables --
@@ -16,3 +23,11 @@ CREATE TABLE projects (
     demo_url TEXT,
     tags JSON
 );
+
+CREATE TABLE featured_projects (
+    project_id INTEGER PRIMARY KEY,
+    caption VARCHAR(52),
+    theme VARCHAR(100),
+
+    FOREIGN KEY (project_id) REFERENCES projects(id)
+)
