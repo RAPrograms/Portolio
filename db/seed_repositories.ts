@@ -13,9 +13,14 @@ const insert = db.prepare(
 
 const insertRepos = db.transaction(repos => {
     for (const repo of repos){
+        // Hide repos that are not finished
+        // Indicated by a lack of a description
+        if(repo["description"] == "")
+            continue
+
         const record: Record<string, any> = {
             "title": repo["name"],
-            "description": repo["name"],
+            "description": repo["description"],
             "repository_url": (repo["url"] != "")? repo["url"]:null,
             "demo_url": repo["homepageUrl"] ?? null,
             "image_uri": null //TODO: add images
@@ -45,7 +50,6 @@ const insertRepos = db.transaction(repos => {
         record["type"] = JSON.stringify(projectType)
         record["tags"] = JSON.stringify(projectTags)
         
-        console.log(record)
         insert.run(record);
     }
 
