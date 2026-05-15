@@ -1,3 +1,14 @@
+export const ProjectTypes = Object.freeze({
+    fullstack: "Full-Stack",
+    frontend: "Front-End",
+    backend: "Back-End",
+    web: "Websites",
+    mobile: "Mobile Apps",
+    devops: "Cloud & DevOps",
+    tools: "CLI & Tooling"
+} as const)
+
+
 export enum Langauages {
     html = "HTML",
     css = "CSS",
@@ -48,8 +59,3 @@ export enum Tools {
 export type Stack = Langauages | Technologies | Frameworks | Tools
 
 
-export enum ProjectType {
-    cli = "CLI",
-    web = "Web App [website]",
-    app = "App"
-}
