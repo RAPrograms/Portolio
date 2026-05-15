@@ -18,7 +18,7 @@ const insertRepos = db.transaction(repos => {
         //    continue
 
         // Prevent processing github main repo
-        if(import.meta.env.GITHUB_USERNAME.toLowerCase() == repo["name"])
+        if(import.meta.env.GITHUB_USERNAME.toLowerCase() == repo["name"].toLowerCase())
             continue
         
 
