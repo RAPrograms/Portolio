@@ -9,3 +9,8 @@ export function get_project_avalibility(){
         PUBLIC_AVAILABILITY.toLowerCase()
     )
 }
+
+export function get_project_image_uri(data: Project | FeaturedProject){
+    if(data.image_uri)
+    https://opengraph.githubassets.com/1/<GithubUsername>/<RepoName>
+}
