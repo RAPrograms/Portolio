@@ -79,12 +79,6 @@
             linear-gradient(to right, var(--grid-colour) 1px, transparent 1px),
             linear-gradient(to bottom, var(--grid-colour) 1px, transparent 1px);
 
-        @media (width <= 570px) {
-            & > div:first-of-type{
-                display: none;
-            }
-        }
-
         &::after{
             background: linear-gradient(transparent, var(--background-colour));
             height: var(--bottom-gap);

@@ -5,13 +5,15 @@
 
     afterNavigate(() => menu_expanded = false)
 
+    const page_affix = (import.meta.env.PROD)? '.html':''
+
     function handleLinkPress(){
         menu_expanded = false
     }
 </script>
 
 <svelte:head>
-    <link rel="prefetch" href="/logos/primary.svg" />
+    <link rel="prefetch" href="/logo.svg" />
 </svelte:head>
 
 <a class="accessibility-skip" href="#main">Skip to content</a>
@@ -31,7 +33,7 @@
             {#each [
                 {name: "About", url: "/#about"},
                 {name: "Technology", url: "/#technology"},
-                {name: "Projects", url: "/projects"},
+                {name: "Projects", url: "/projects" + page_affix},
                 {name: "Contact", url: "/#contact"},
             ] as {name, url}}
                 <li>
