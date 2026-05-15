@@ -71,7 +71,7 @@ function seedFeaturedProjects(){
     const data = TOML.parse(raw);
 
     const insert = db.prepare(
-        `INSERT INTO projects (project_id, caption, theme)
+        `INSERT INTO featured_projects (project_id, caption, theme)
         VALUES (:project_id, :caption, :theme)`
     );
 
@@ -80,7 +80,7 @@ function seedFeaturedProjects(){
             `SELECT id FROM projects
             WHERE title = ?
             LIMIT 1`
-        ).get("Rust-Wordle-Api")["id"]
+        ).get(repo_name)["id"]
 
         insert.run({
             project_id: id,
