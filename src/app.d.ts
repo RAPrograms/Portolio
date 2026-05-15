@@ -1,7 +1,3 @@
-declare module 'emums' {
-	export type * from "./lib/enums"
-}
-
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
@@ -17,7 +13,6 @@ declare global {
 		title: string
 		description: string
 		tags: Array<Stack>
-		type: ProjectType
 		image_uri: string
 
 		repository_url?: string
