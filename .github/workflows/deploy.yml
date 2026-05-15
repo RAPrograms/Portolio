@@ -39,6 +39,9 @@ jobs:
 
       - name: Seed Github repositories into project table
         run: bun ./db/seed_repositories.ts
+        env:
+          GITHUB_USERNAME: ${{ github.repository_owner }}
+
 
       - name: Build
         run: bun run build

@@ -3,7 +3,6 @@ import { Frameworks, Langauages, ProjectTypes, Stack, Technologies, Tools } from
 import { readFile } from 'node:fs/promises';
 import { Database } from "bun:sqlite";
 
-
 const db = new Database('./db/data.db', { strict: true });
 
 const insert = db.prepare(
@@ -15,8 +14,13 @@ const insertRepos = db.transaction(repos => {
     for (const repo of repos){
         // Hide repos that are not finished
         // Indicated by a lack of a description
-        if(repo["description"] == "")
+        //if(repo["description"] == "")
+        //    continue
+
+        // Prevent processing github main repo
+        if(import.meta.env.GITHUB_USERNAME.toLowerCase == repo["name"])
             continue
+        
 
         const record: Record<string, any> = {
             "title": repo["name"],
