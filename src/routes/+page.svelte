@@ -1,12 +1,16 @@
 <script lang="ts">
+    import type { PageProps } from "./$types";
+
+    import ProjectCard from "../components/project-cards/featured.svelte";
     import Typewritertext from "../components/typewritertext.svelte";
     import HighlightCard from "../components/highlight-card.svelte";
     import Hero from "../components/layout/hero.svelte";
 
     import ContactSection from "../sections/contact.svelte"
-    import ProjectsSection from "../sections/featured_projects.svelte"
     
     import { get_project_avalibility } from "$lib";
+
+    let { data }: PageProps = $props();
 </script>
 
 {#snippet avalibilityNotice()}
@@ -41,15 +45,13 @@
         </p>
 
         <div class="highlights">
-            <HighlightCard icon="users" title="Collaboration Award">
-                College Values Award for Collaboration & Innovation 2024.
-            </HighlightCard>
-            <HighlightCard icon="code" title="19,000+ Lines of code">
-                Contributed across Python, JavaScript, Java, HTML & CSS projects.
-            </HighlightCard>
-            <HighlightCard icon="code" title="Student of the Year">
-                Recognised as Student of the Year 2024 for excellence.
-            </HighlightCard>
+            {#each [
+                {"icon": "users", "title": "Collaboration Award", "content": "College Values Award for Collaboration & Innovation 2024."},
+                {"icon": "code", "title": "19,000+ Lines of code", "content": "Contributed across Python, JavaScript, Java, HTML & CSS projects."},
+                {"icon": "award", "title": "Student of the Year", "content": "Recognised as Student of the Year 2024 for excellence."},
+            ] as {icon, title, content}}
+                <HighlightCard icon={icon as any} {title}>{content}</HighlightCard>
+            {/each}
         </div>
     </section>
 
@@ -66,7 +68,22 @@
         </section>
     </div>
 
-    <ProjectsSection/>
+    <section id="featured-projects">
+        <header>
+            <h2>Featured Projects</h2>
+            <p>Here are some of my favorite projects</p>
+        </header>
+
+        <div>
+            {#each data["featuredProjects"] as details}
+                <ProjectCard
+                    data={details}
+                    theme={details["theme"]}
+                    caption={details["caption"]}
+                />
+            {/each}
+        </div>
+    </section>
 
     <div class="section-shape-wrapper">
         <ContactSection/>
@@ -77,11 +94,14 @@
     @use "$styling/_variables.scss" as *;
 
     main{
-        max-width: none !important;
         flex-direction: column;
         text-align: center;
         display: flex;
         gap: 50px;
+        
+        // Disable global styling
+        max-width: none !important;
+        padding: 0 !important;
 
         & > div.section-shape-wrapper{
             $background-colour: #1B1B1B;
@@ -90,7 +110,6 @@
             position: relative;
             padding: 20px 0;
             margin: 70px 0;
-
 
             &::before, &::after{
                 background-color: $background-colour;
@@ -132,6 +151,10 @@
                 font-size: 1.3rem;
             }
         }
+
+        section{
+            width: 100%;
+        }
     }
 
     /* Additional Hero Styling */
@@ -143,6 +166,14 @@
 
     .hero-availability-tag{
         @include coloured-tag(var(--primary-colour));
+    }
+
+    section#featured-projects > div{
+        flex-direction: column;
+        padding-top: 40px;
+        display: flex;
+        width: 100%;
+        gap: 40px;
     }
 
     section#about{

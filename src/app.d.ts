@@ -19,6 +19,18 @@ declare global {
 		repository_url?: string
 		demo_url?: string
 	}
+
+	interface FeaturedProject extends Project {
+		caption: string,
+		theme: string
+	}
+
+	type ProjectThemes = 
+        "Deep Forest" | 
+        "Midnight Nebula" |
+        "Ocean Trench" |
+        "Desert Dusk" |
+        "Arctic Berry"
 }
 
 export {};

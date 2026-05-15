@@ -4,15 +4,10 @@
 
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
     import GithubIcon from "$icons/github.svg?raw"
+    import Tag from "../tag.svelte";
 
-    export type Themes = 
-        "Deep Forest" | 
-        "Midnight Nebula" |
-        "Ocean Trench" |
-        "Desert Dusk" |
-        "Arctic Berry"
 
-    const {
+    /*const {
         title,
         children,                  // The description text (provided within the component tags)
         tags,        
@@ -24,16 +19,16 @@
         
         demo_url,                  // The URL to the live demo
         repo_url,                  // The optional url to the git repo
+   */
+
+    const {
+        data,
+        theme,
+        caption
     }:{
-        title: string,
-        children: Snippet,
-        tags: Array<Stack | ProjectType>,
-        preview_size: "desktop" | "mobile",
-        preview_img: string,
-        preview_theme: Themes,
+        data: Project,
+        theme: ProjectThemes
         caption: string,
-        demo_url?: string,
-        repo_url?: string
     } = $props()
 
     function parseTag(tag: string): [string, string] {
@@ -55,46 +50,40 @@
 <article>
     <div class="preview-containor">
         <svelte:element
-            data-theme={preview_theme}
+            data-theme={theme}
             class="preview"
             target="_blank"
-            this={(demo_url)? "a" : "article"}
-            href={demo_url}>
+            this={(data.demo_url)? "a" : "article"}
+            href={data.demo_url}>
 
-            <span>{caption}</span>
+            <div class="containor">
+                <span class="caption">{caption}</span>
+                
+                {#if data.demo_url}
+                    <div class="icon">{@html RightArrowIcon}</div>
+                {/if}
+            </div>
             
-            {#if demo_url}
-                <div class="icon">{@html RightArrowIcon}</div>
-            {/if}
-            
-            <img data-preview-type="{preview_size}" src="{preview_img}" aria-hidden="true" alt="">
+            <img src={data.image_uri} aria-hidden="true" alt="">
         </svelte:element>
     </div>
 
     <div class="details">
         <h3>
-            <span>{title}</span>
-            {#if repo_url}
-                <a href="{repo_url}" target="_blank">
+            <span>{data.title}</span>
+            {#if data.repository_url}
+                <a href="{data.repository_url}" target="_blank">
                     {@html GithubIcon}
                 </a>
             {/if}
         </h3>
-        <p>{@render children()}</p>
+        <p>{data.description}</p>
         <div class="tags">
-            {#each tags as tag}
-                {@const [name, icon] = parseTag(tag)}
-                
-                <a href="/projects?TODO">
-                    {#if icon != ""}
-                        <img src="/tag-icons/{icon}.svg" height="15" aria-hidden="true" alt="">
-                    {/if}
-                    {name}
-                </a>
+            {#each data.tags as tag}
+                <Tag value={tag} size="normal" isProjectsLink={true}/>
             {/each}
         </div>
     </div>
-
 </article>
 
 
@@ -106,7 +95,6 @@
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
-        margin: 20px 0;
 
         @media (width <= $breakpoint) {
             flex-direction: column-reverse;
@@ -151,20 +139,15 @@
                 --padding: 20px;
 
                 background: var(--gradient);
-                grid-template-columns: 1fr min-content; 
-                grid-template-rows: max-content 1fr; 
                 container-type: inline-size;
                 box-sizing: border-box;
-                grid-auto-columns: 1fr; 
+                display: flex;
+                flex-direction: column;
                 aspect-ratio: 16 / 10;
                 border-radius: 25px;
                 overflow: hidden;
                 padding: var(--padding);
-                display: grid; 
-                gap: 20px 5px; 
-                grid-template-areas: 
-                    "Caption Icon"
-                    "Preview Preview"; 
+                 
 
                 // Allows preview to stay on screen when scrolling on long descriptions
                 top: calc(var(--nav-height) + 20px);
@@ -176,13 +159,20 @@
                 outline: 1px solid rgba(117, 117, 117, .45);
                 background-clip: padding-box;
 
-                //Caption
-                & > span{
+                & > .containor{
+                    display: flex;
+                    gap: 5px;
+                    justify-content: space-between;
+                }
+                
+                .caption{
                     color: var(--colour);
                     padding-left: 1.8cqw;
-                    grid-area: Caption;
                     text-align: left;
                     font-size: 4cqw;
+                    flex-grow: 1;
+
+                    word-break: break-all;
 
                     // Forces 2 line captions
                     overflow: hidden;
@@ -191,7 +181,7 @@
                     -webkit-box-orient: vertical;
                 }
                 
-                & > .icon{
+                .icon{
                     place-items: center;
                     margin-right: 4cqw;
                     color: var(--colour);
@@ -210,11 +200,9 @@
                     position: absolute;
                     grid-area: Preview;
                     translate: -50% 0;
+                    max-height: 76%;
                     margin: auto;
                     left: 50%;
-
-                    &[data-preview-type=desktop]{ width: 95%; }
-                    &[data-preview-type=mobile]{ width: 23%; }
                 }
 
                 // Preview image positioning
