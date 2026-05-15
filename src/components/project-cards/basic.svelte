@@ -1,10 +1,16 @@
 <script lang="ts">
     import Tag from "../tag.svelte";
 
-    const { data }:{ data: Project } = $props()
+    const {
+        data,
+        ghosted = false
+    }:{
+        data: Project,
+        ghosted: boolean
+    } = $props()
 </script>
 
-<article>
+<article class:ghosted={ghosted}>
     <div class="image-containor" style="--image-uri: url('{data.image_uri}')">
         <img src={data.image_uri} alt="Project Preview" loading="lazy">
     </div>
@@ -20,14 +26,14 @@
     </div>
 
     <div class="links">
-        <a href={data.repository_url} target="_blank">
+        <a href={data.repository_url} target="_blank" tabindex={ghosted? -1:undefined}>
             <svg width="24" height="24" viewBox="0 0 24 24"><use href="#github-icon"/></svg>
             Code
         </a>
 
         <div class="seperator"></div>
 
-        <a href={data.demo_url} target="_blank">
+        <a href={data.demo_url} target="_blank" tabindex={ghosted? -1:undefined}>
             <svg width="24" height="24" viewBox="0 0 24 24"><use href="#eye-icon"/></svg>
             Demo
         </a>
@@ -44,6 +50,11 @@
         display: flex;
         padding: 10px;
         gap: 20px;
+
+        &.ghosted{
+            filter: grayscale(100%);
+            opacity: .5;
+        }
 
         .image-containor{
             justify-content: center;
