@@ -75,21 +75,23 @@ function seedFeaturedProjects(){
         VALUES (:project_id, :caption, :theme)`
     );
 
-    const insertRecords = db.transaction(([repo_name, details]) => {
-        const id = db.query(
-            `SELECT id FROM projects
-            WHERE title = ?
-            LIMIT 1`
-        ).get(repo_name)["id"]
+    const insertRecords = db.transaction((data) => {
+        for(const [repo_name, details] of Object.entries(data)){
+            const id = db.query(
+                `SELECT id FROM projects
+                WHERE title = ?
+                LIMIT 1`
+            ).get(repo_name)["id"]
 
-        insert.run({
-            project_id: id,
-            caption: details["caption"],
-            theme: details["theme"]
-        })
+            insert.run({
+                project_id: id,
+                caption: details["caption"],
+                theme: details["theme"]
+            })
+        }
     })
 
-    insertRecords(Object.entries(data))
+    insertRecords(data)
 }
 
 await seedProjects()
