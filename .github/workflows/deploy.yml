@@ -24,6 +24,19 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
 
+      - name: Create sqlite database
+        run: sqlite3 ./db/database.db < ./db/setup.sql
+
+      # Exports all public Github repos, from owner, into a JSON file
+      - name: Fetch repositories details
+        run: |
+          gh repo list ${{ github.repository_owner }} --limit 1000 --source --public --json description,homepageUrl,id,languages,description,repositoryTopics,name,primaryLanguage,repositoryTopics,url > ./db/repos.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Seed Github repositories into project table
+        run: bun ./db/seed_repositories.ts
+
       - name: Install dependencies
         run: bun install
 

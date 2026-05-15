@@ -1,6 +1,10 @@
 <script lang="ts">
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
-
+    import LocationIcon from "$icons/based-location.svg?raw"
+    import LinkedInIcon from "$icons/linkedin.svg?raw"
+    import GithubIcon from "$icons/github.svg?raw"
+    import EmailIcon from "$icons/email.svg?raw"
+    
     import FormField from "$components/form/form-field.svelte";
     import Form from "$components/form/form.svelte";
 
@@ -23,7 +27,7 @@
 )}
 	<li>
         <a href={link} aria-label={accessibility_label} target="_blank">
-            <img src="/icons/{icon}.svg" alt="">
+            {@html icon}
             <b>{title}</b>
             <div>{value}</div>
             {@html RightArrowIcon}
@@ -47,15 +51,15 @@
 
         <aside>
             <ul>
-                {@render details_card("email", `mailto:${PUBLIC_CONTACT_EMAIL}`, "Email", PUBLIC_CONTACT_EMAIL, "Email Link")}
-                {@render details_card("github", `https://github.com/${PUBLIC_GITHUB_USERNAME}`, "Github", PUBLIC_GITHUB_USERNAME, "Github Link")}
+                {@render details_card(EmailIcon, `mailto:${PUBLIC_CONTACT_EMAIL}`, "Email", PUBLIC_CONTACT_EMAIL, "Email Link")}
+                {@render details_card(GithubIcon, `https://github.com/${PUBLIC_GITHUB_USERNAME}`, "Github", PUBLIC_GITHUB_USERNAME, "Github Link")}
                 
                 {#if PUBLIC_LINKEDIN_USERNAME != "" && PUBLIC_LINKEDIN_USERNAME != undefined}
-                    {@render details_card("linkedin", `https://www.linkedin.com/in/${PUBLIC_LINKEDIN_USERNAME}`, "Linked In", PUBLIC_LINKEDIN_USERNAME, "Linkedin Link")}
+                    {@render details_card(LinkedInIcon, `https://www.linkedin.com/in/${PUBLIC_LINKEDIN_USERNAME}`, "Linked In", PUBLIC_LINKEDIN_USERNAME, "Linkedin Link")}
                 {/if}
                 
                 {#if PUBLIC_LOCATION_TEXT != "" && PUBLIC_LOCATION_URL != ""}
-                    {@render details_card("based-location", PUBLIC_LOCATION_URL, "Located", PUBLIC_LOCATION_TEXT, `Located in ${PUBLIC_LOCATION_TEXT}`)}
+                    {@render details_card(LocationIcon, PUBLIC_LOCATION_URL, "Located", PUBLIC_LOCATION_TEXT, `Located in ${PUBLIC_LOCATION_TEXT}`)}
                 {/if}
             </ul>
         </aside>
@@ -107,12 +111,9 @@
                         "Icon Name Arrow"
                         "Icon Value Arrow";
 
-                    & > img{
+                    & > :global(svg):first-child{
                         aspect-ratio: 1/1;
                         width: 100%;
-                    }
-
-                    & > img:first-child{
                         grid-area: Icon;
                     }
 

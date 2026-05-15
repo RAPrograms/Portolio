@@ -1,6 +1,7 @@
 <script lang="ts">
-    import Footer from "$components/footer.svelte";
-    import Navbar from "$components/navbar.svelte";
+    import Footer from "../components/layout/footer.svelte";
+    import Navbar from "../components/layout/navbar.svelte";
+	
 	import "../styling/main.scss";
 
 	let { children } = $props();
@@ -36,6 +37,16 @@
 	<meta property="twitter:description" content={description} />
 	<meta property="twitter:image" content="/thumbnail.png" />
 </svelte:head>
+
+<noscript>
+	<!-- Hides elements which require javascript to function-->
+	<style>
+		.require-javascript{
+			visibility: none !important;
+			display: none !important;
+		}
+	</style>
+</noscript>
 
 <div>
 	<Navbar/>

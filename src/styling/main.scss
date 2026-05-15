@@ -18,23 +18,30 @@
 }
 
 
-
+/* Global element styling */
 *{
     box-sizing: border-box;
     margin: 0;
 }
 
 html{
-    @media (prefers-reduced-motion: none) {
-        scroll-behavior: smooth;
-    }
+    @media (prefers-reduced-motion: none) { scroll-behavior: smooth; }
+
+    scroll-padding-top: calc(var(--nav-height) + 30px);
 }
 
 body{
     font-family: "Space Grotesk", system-ui, sans-serif;
+    
     background-color: var(--background-colour);
     min-height: 100vh;
     padding: 0;
+}
+
+main#main{
+    max-width: var(--max-content-width);
+    padding: 0 10px;
+    margin: auto;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -48,8 +55,12 @@ h2{
 }
 
 p{
+    color: var(--secondary-text-colour);
     padding: 0;
     margin: 0;
+
+    // Colour override to emphasise
+    & > span{ color: var(--primary-text-colour) }
 }
 
 a{

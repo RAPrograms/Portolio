@@ -1,22 +1,37 @@
 <script lang="ts">
-    import HighlightCard from "$components/highlight-card.svelte";
-    import Hero from "$components/hero.svelte";
+    import type { PageProps } from "./$types";
 
-    import ContactSection from "$sections/contact.svelte"
-    import ProjectsSection from "$sections/featured_projects.svelte"
+    import ProjectCard from "../components/project-cards/featured.svelte";
+    import Typewritertext from "../components/typewritertext.svelte";
+    import HighlightCard from "../components/highlight-card.svelte";
+    import Hero from "../components/layout/hero.svelte";
+
+    import ContactSection from "../sections/contact.svelte"
     
     import { get_project_avalibility } from "$lib";
+
+    let { data }: PageProps = $props();
 </script>
 
-<Hero flavor_text="Sleep && Eat && Game && Code" cycling_text={[
-        "Software Developer",
-        "Programmer",
-        "Gamer",
-        "Coder"
-    ]}
-    availability_notice={get_project_avalibility()}
-    return_btn={false}>
-    Passionate about creating digital software with expertise in <span>web development</span>, <span>back-end systems</span>, and <span>application development</span>.
+{#snippet avalibilityNotice()}
+    {#if get_project_avalibility()}
+        <div class="hero-availability-tag">Available for projects</div>
+    {/if}
+{/snippet}
+
+<Hero title="whoami" flavorText="Sleep && Eat && Game && Code" notice={avalibilityNotice}>
+    <div class="hero-attributes">
+        <Typewritertext lines={[
+            "Software Developer",
+            "Programmer",
+            "Gamer",
+            "Coder"
+        ]}/>
+    </div>
+
+    <p class="hero-description">
+        Passionate about creating digital software with expertise in <span>web development</span>, <span>back-end systems</span>, and <span>application development</span>.
+    </p>
 </Hero>
 
 <main id="main">
@@ -30,15 +45,13 @@
         </p>
 
         <div class="highlights">
-            <HighlightCard icon="users" title="Collaboration Award">
-                College Values Award for Collaboration & Innovation 2024.
-            </HighlightCard>
-            <HighlightCard icon="code" title="19,000+ Lines of code">
-                Contributed across Python, JavaScript, Java, HTML & CSS projects.
-            </HighlightCard>
-            <HighlightCard icon="code" title="Student of the Year">
-                Recognised as Student of the Year 2024 for excellence.
-            </HighlightCard>
+            {#each [
+                {"icon": "users", "title": "Collaboration Award", "content": "College Values Award for Collaboration & Innovation 2024."},
+                {"icon": "code", "title": "19,000+ Lines of code", "content": "Contributed across Python, JavaScript, Java, HTML & CSS projects."},
+                {"icon": "award", "title": "Student of the Year", "content": "Recognised as Student of the Year 2024 for excellence."},
+            ] as {icon, title, content}}
+                <HighlightCard icon={icon as any} {title}>{content}</HighlightCard>
+            {/each}
         </div>
     </section>
 
@@ -55,7 +68,24 @@
         </section>
     </div>
 
-    <ProjectsSection/>
+    <section id="featured-projects">
+        <header>
+            <h2>Featured Projects</h2>
+            <p>Here are some of my favorite projects</p>
+        </header>
+
+        <div>
+            {#each data["featuredProjects"] as details}
+                <ProjectCard
+                    data={details}
+                    theme={details["theme"]}
+                    caption={details["caption"]}
+                />
+            {/each}
+        </div>
+
+        <a class="additional-resources" href="/projects#main">See more projects</a>
+    </section>
 
     <div class="section-shape-wrapper">
         <ContactSection/>
@@ -70,6 +100,10 @@
         text-align: center;
         display: flex;
         gap: 50px;
+        
+        // Disable global styling
+        max-width: none !important;
+        padding: 0 !important;
 
         & > div.section-shape-wrapper{
             $background-colour: #1B1B1B;
@@ -78,7 +112,6 @@
             position: relative;
             padding: 20px 0;
             margin: 70px 0;
-
 
             &::before, &::after{
                 background-color: $background-colour;
@@ -120,6 +153,51 @@
                 font-size: 1.3rem;
             }
         }
+
+        section{
+            width: 100%;
+
+            & > a.additional-resources:last-child{
+                align-items: center;
+                margin-top: 20px;
+                font-size: large;
+                display: flex;
+                color: white;
+                gap: 5px;
+
+                &::after{
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-color: #2F2F2F;
+                    background-size: 14px;
+                    display: inline-block;
+                    border-radius: 50%;
+                    height: 20px;
+                    width: 20px;
+                    content: "";
+                }
+            }
+        }
+    }
+
+    /* Additional Hero Styling */
+    .hero-description{
+        font-size: clamp(0.9rem,3vw,1.3rem);
+        color: var(--secondary-text-colour);
+        margin-top: 30px;
+    }
+
+    .hero-availability-tag{
+        @include coloured-tag(var(--primary-colour));
+    }
+
+    section#featured-projects > div{
+        flex-direction: column;
+        padding-top: 40px;
+        display: flex;
+        width: 100%;
+        gap: 40px;
     }
 
     section#about{

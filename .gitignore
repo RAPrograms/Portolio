@@ -1,5 +1,7 @@
 node_modules
 
+data.db
+
 # Output
 .output
 .vercel

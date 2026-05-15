@@ -8,6 +8,29 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	interface Project{
+		title: string
+		description: string
+		tags: Array<Stack>
+		type: string | Array<string>
+		
+		image_uri?: string
+		repository_url?: string
+		demo_url?: string
+	}
+
+	interface FeaturedProject extends Project {
+		caption: string,
+		theme: string
+	}
+
+	type ProjectThemes = 
+        "Deep Forest" | 
+        "Midnight Nebula" |
+        "Ocean Trench" |
+        "Desert Dusk" |
+        "Arctic Berry"
 }
 
 export {};

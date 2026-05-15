@@ -9,3 +9,16 @@ export function get_project_avalibility(){
         PUBLIC_AVAILABILITY.toLowerCase()
     )
 }
+
+export function get_project_image_uri(data: Project | FeaturedProject){
+    if(data.image_uri)
+        return data.image_uri
+
+    if(data.repository_url && data.repository_url.startsWith("https://github.com/")){
+       const repository_name = data.repository_url.replace("https://github.com/", "")
+       return "https://opengraph.githubassets.com/1/" + repository_name
+    }
+
+    console.error(`Unable to load an image for "${data.title}"`)
+    return 'https://placeimg.dev/1600x900?text=Unable+to+Load&textColor=ffffff&gradient=DF3A3A,f57387'
+}

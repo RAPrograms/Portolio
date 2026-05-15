@@ -3,54 +3,48 @@
 
     import { PUBLIC_GITHUB_USERNAME } from '$env/static/public';
 
-    import Typewritertext from "./typewritertext.svelte";
-
     const {
+        title,
+        flavorText,
+        backURL,
         children,
-        flavor_text,
-        return_btn = false,
-        cycling_text = [],
-        availability_notice = false
-    } : {
-        flavor_text: string,
-        return_btn: boolean,
-        cycling_text: Array<string>,
-        availability_notice: boolean,
-        children: Snippet
+        notice
+    }:{
+        title: string
+        flavorText: string,
+        backURL?: string,
+        children?: Snippet,
+        notice?: Snippet,
     } = $props()
 </script>
 
 <section class="hero">
-    {#if return_btn}
-        <a href="/" class="return">
+    {#if backURL}
+        <a href="{backURL}" class="return">
             <img src="/icons/left-arrow.svg" alt="">
-            <span>Return to homepage</span>
+            <span>Back</span>
         </a>
     {:else}
         <div></div>
     {/if}
 
     <div class="content">
-        <p class="flavor-text">$ {flavor_text}</p>
+        <section>
+            <p class="flavor-text">$ {flavorText}</p>
 
-        <h1>
-            <div>reece@{PUBLIC_GITHUB_USERNAME.toLowerCase()}:~$</div>
-            <div>whoami</div>
-        </h1>
+            <h1>
+                <div>reece@{PUBLIC_GITHUB_USERNAME.toLowerCase()}:~$</div>
+                <div>{title}</div>
+            </h1>
+        </section>
 
-        {#if cycling_text.length > 0}
-            <div class="attributes">
-                <Typewritertext lines={cycling_text}/>
-            </div>
-        {/if}
-
-        <p class="description">
+        {#if children}
             {@render children()}
-        </p>
+        {/if}
     </div>
-    
-    {#if availability_notice}
-        <div class="availability-tag">Available for projects</div>
+
+    {#if notice}
+        {@render notice()}
     {/if}
 
     <a href="#main">
@@ -85,12 +79,6 @@
             linear-gradient(to right, var(--grid-colour) 1px, transparent 1px),
             linear-gradient(to bottom, var(--grid-colour) 1px, transparent 1px);
 
-        @media (width <= 570px) {
-            & > div:first-of-type{
-                display: none;
-            }
-        }
-
         &::after{
             background: linear-gradient(transparent, var(--background-colour));
             height: var(--bottom-gap);
@@ -103,12 +91,13 @@
 
         & > *{
             @include center_content();
+            @extend %no-select
         }
 
         & > a.return{
             @include fainted-button-tag();
 
-            margin: 0 0 0 max(calc((100vw - var(--max-content-width)) / 2), 0px);
+            margin-left: max(calc((100vw - var(--max-content-width)) / 2), 10px);
 
             & > span{
                 translate: 0 2px;
@@ -116,17 +105,20 @@
         }
 
         & > .content{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             text-align: center;
             width: min-content;
 
-            & > p.flavor-text{
+            & p.flavor-text{
                 font-size: clamp(.8rem,4vw,1.2rem);
                 line-height: 1.5rem;
                 margin-bottom: 20px;
                 color: #C76969;
             }
 
-            & > h1{
+            h1{
                 font-size: clamp(.8rem,8vw,4rem);
                 word-break: keep-all;
                 margin-bottom: 10px;
@@ -141,20 +133,6 @@
                     margin-top: .5rem;
                 }
             }
-
-            & > .description{
-                font-size: clamp(0.9rem,3vw,1.3rem);
-                color: var(--secondary-text-colour);
-                margin-top: 30px;
-
-                & > :global(span){
-                    color: var(--primary-text-colour);
-                }
-            }
-        }
-
-        & > .availability-tag{
-            @include coloured-tag(var(--primary-colour))
         }
 
         & > .pulses{
@@ -191,8 +169,8 @@
                 animation-duration: 4.5s;
                 animation-delay: 1s;
                 translate: 45% 30px;
-                right: 0;
                 opacity: 0.3;
+                right: 0;
 
                 @media (width < 530px) {
                     display: none;
