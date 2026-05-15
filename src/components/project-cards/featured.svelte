@@ -1,25 +1,9 @@
 <script lang="ts">
-    import type { ProjectType, Stack } from "../lib/enums";
-    import type { Snippet } from "svelte";
+    import { get_project_image_uri } from "$lib";
 
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
     import GithubIcon from "$icons/github.svg?raw"
     import Tag from "../tag.svelte";
-
-
-    /*const {
-        title,
-        children,                  // The description text (provided within the component tags)
-        tags,        
-        
-        preview_size = "desktop",  // The device type the preview image is
-        preview_img,               // A image string
-        preview_theme,             // The theme used for the text colour and background gradient
-        caption,                   // The text on the preview card
-        
-        demo_url,                  // The URL to the live demo
-        repo_url,                  // The optional url to the git repo
-   */
 
     const {
         data,
@@ -30,21 +14,6 @@
         theme: ProjectThemes
         caption: string,
     } = $props()
-
-    function parseTag(tag: string): [string, string] {
-        // Used to identify if any icon overrides are present
-        // EG: Sveltekit [svelte] = Name: Sveltekit & Icon: svelte
-        const regex = /\s\[.*\]/
-
-        const matches = tag.match(regex)
-        if(matches == null)
-            return [tag, tag.toLowerCase().replace(" ", "_")]
-
-        const name = tag.replace(regex, "")
-        const icon = matches[0].slice(2, -1)
-
-        return [name, icon]
-    }
 </script>
 
 <article>
@@ -64,7 +33,7 @@
                 {/if}
             </div>
             
-            <img src={data.image_uri} aria-hidden="true" alt="">
+            <img src={get_project_image_uri(data)} aria-hidden="true" alt="">
         </svelte:element>
     </div>
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { get_project_image_uri } from "$lib";
+    
     import Tag from "../tag.svelte";
 
     const {
@@ -12,7 +14,7 @@
 
 <article class:ghosted={ghosted}>
     <div class="image-containor" style="--image-uri: url('{data.image_uri}')">
-        <img src={data.image_uri} alt="Project Preview" loading="lazy">
+        <img src={get_project_image_uri(data)} alt="Project Preview" loading="lazy">
     </div>
 
     <h3>{data.title}</h3>

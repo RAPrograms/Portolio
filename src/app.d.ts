@@ -13,9 +13,9 @@ declare global {
 		title: string
 		description: string
 		tags: Array<Stack>
-		image_uri: string
 		type: string | Array<string>
-
+		
+		image_uri?: string
 		repository_url?: string
 		demo_url?: string
 	}
