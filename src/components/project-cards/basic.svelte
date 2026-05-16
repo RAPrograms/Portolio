@@ -65,6 +65,7 @@
             aspect-ratio: 16/9;
             overflow: hidden;
             display: flex;
+            width: 100%;
 
             &::before{
                 filter: grayscale(100%) blur(3px);
