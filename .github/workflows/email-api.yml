@@ -20,12 +20,28 @@ jobs:
       - name: Update worker default name
         run: jq '.name = "portfolio-contact-api"' ./form-email-api/api/wrangler.jsonc > ./form-email-api/temp.jsonc && mv ./form-email-api/temp.jsonc ./form-email-api/api/wrangler.jsonc
 
-      - name: List files to find schema.toml
-        run: |
-          echo "=== Root Directory ==="
-          ls -R .
-
       - name: Override schema.toml
         run: mv ./form-email-api/schema.toml ./form-email-api/api/schema.toml
 
-      - run: cat ./form-email-api/api/schema.toml
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Cache Node dependencies
+        uses: actions/cache@v3 
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('bun.lock') }}
+
+      - name: Install dependencies
+        run: bun ci
+
+      - name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
