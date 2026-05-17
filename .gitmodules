@@ -1,0 +1,3 @@
+[submodule "form-email-api/api"]
+	path = form-email-api/api
+	url = git@github.com:RAPrograms/Email-Form-API.git
