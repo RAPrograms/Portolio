@@ -60,12 +60,16 @@
 
 <style lang="scss">
 	:global(body > div > div){
-		flex-direction: column;
 		min-height: 100vh;
-		display: flex;
+		
+		&, & > div{
+			flex-direction: column;
+			display: flex;
+		}
 
 		& > div{
 			min-height: calc(100vh - var(--nav-height));
+			align-items: center;
 		}
 	}
 </style>

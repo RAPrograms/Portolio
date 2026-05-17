@@ -91,6 +91,7 @@
         min-height: calc(100vh - var(--nav-height));
         flex-direction: column;
         display: flex;
+        width: 100%;
     }
 
     header{

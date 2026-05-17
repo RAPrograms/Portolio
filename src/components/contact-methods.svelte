@@ -35,41 +35,35 @@
     </li>
 {/snippet}
 
-<section id="contact">
-    <header>
-        <h2>Contact Me</h2>
-        <p>Let us create magic!</p>
-    </header>
 
-    <div>
-        <Form url="https://submit-form.com/c5LGk94Ui">
-            <FormField title="Name" name="name"/>
-            <FormField title="Email" name="email_address" type="email"/>
-            <FormField title="Subject" name="subject"/>
-            <FormField title="What's on your mind?" name="message" kind="textarea"/>
-        </Form>
+<div class="contact-methods">
+    <Form url="https://submit-form.com/c5LGk94Ui">
+        <FormField title="Name" name="name"/>
+        <FormField title="Email" name="email_address" type="email"/>
+        <FormField title="Subject" name="subject"/>
+        <FormField title="What's on your mind?" name="message" kind="textarea"/>
+    </Form>
 
-        <aside>
-            <ul>
-                {@render details_card(EmailIcon, `mailto:${PUBLIC_CONTACT_EMAIL}`, "Email", PUBLIC_CONTACT_EMAIL, "Email Link")}
-                {@render details_card(GithubIcon, `https://github.com/${PUBLIC_GITHUB_USERNAME}`, "Github", PUBLIC_GITHUB_USERNAME, "Github Link")}
-                
-                {#if PUBLIC_LINKEDIN_USERNAME != "" && PUBLIC_LINKEDIN_USERNAME != undefined}
-                    {@render details_card(LinkedInIcon, `https://www.linkedin.com/in/${PUBLIC_LINKEDIN_USERNAME}`, "Linked In", PUBLIC_LINKEDIN_USERNAME, "Linkedin Link")}
-                {/if}
-                
-                {#if PUBLIC_LOCATION_TEXT != "" && PUBLIC_LOCATION_URL != ""}
-                    {@render details_card(LocationIcon, PUBLIC_LOCATION_URL, "Located", PUBLIC_LOCATION_TEXT, `Located in ${PUBLIC_LOCATION_TEXT}`)}
-                {/if}
-            </ul>
-        </aside>
-    </div>
-</section>
+    <aside>
+        <ul>
+            {@render details_card(EmailIcon, `mailto:${PUBLIC_CONTACT_EMAIL}`, "Email", PUBLIC_CONTACT_EMAIL, "Email Link")}
+            {@render details_card(GithubIcon, `https://github.com/${PUBLIC_GITHUB_USERNAME}`, "Github", PUBLIC_GITHUB_USERNAME, "Github Link")}
+            
+            {#if PUBLIC_LINKEDIN_USERNAME != "" && PUBLIC_LINKEDIN_USERNAME != undefined}
+                {@render details_card(LinkedInIcon, `https://www.linkedin.com/in/${PUBLIC_LINKEDIN_USERNAME}`, "Linked In", PUBLIC_LINKEDIN_USERNAME, "Linkedin Link")}
+            {/if}
+            
+            {#if PUBLIC_LOCATION_TEXT != "" && PUBLIC_LOCATION_URL != ""}
+                {@render details_card(LocationIcon, PUBLIC_LOCATION_URL, "Located", PUBLIC_LOCATION_TEXT, `Located in ${PUBLIC_LOCATION_TEXT}`)}
+            {/if}
+        </ul>
+    </aside>
+</div>
 
 <style lang="scss">
     @use "$styling/_variables.scss" as variables;
 
-    section#contact > div{
+    div.contact-methods{
         justify-content: center;
         max-width: 98vw;
         display: flex;
