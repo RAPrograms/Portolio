@@ -1,0 +1,23 @@
+name: Deploy form email api
+
+on:
+  push:
+    branches: [ 6-email-form-upgrade ]
+  workflow_dispatch:
+  
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  Email-Form-API-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - run: cat ./form-email-api/api/wrangler.jsonc
+
+      - name: Update worker default name
+        run: jq '.name = "portfolio-contact-api"' ./form-email-api/api/wrangler.jsonc > ./form-email-api/temp.jsonc && mv ./form-email-api/temp.jsonc ./form-email-api/api/wrangler.jsonc
+
+      - run: cat ./form-email-api/api/wrangler.jsonc
