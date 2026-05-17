@@ -24,7 +24,7 @@ jobs:
         run: mv ./form-email-api/schema.toml ./form-email-api/api/schema.toml
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: 24
       
@@ -32,7 +32,7 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: Cache Node dependencies
-        uses: actions/cache@v3 
+        uses: actions/cache@v4 
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('**/bun.lockb', '**/bun.lock') }}
@@ -45,3 +45,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: ./form-email-api/api
