@@ -39,6 +39,7 @@ jobs:
 
       - name: Install dependencies
         run: bun ci
+        working-directory: ./form-email-api/api
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v4
