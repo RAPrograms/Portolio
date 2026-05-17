@@ -17,9 +17,10 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - run: cat ./form-email-api/api/wrangler.jsonc
-
       - name: Update worker default name
         run: jq '.name = "portfolio-contact-api"' ./form-email-api/api/wrangler.jsonc > ./form-email-api/temp.jsonc && mv ./form-email-api/temp.jsonc ./form-email-api/api/wrangler.jsonc
 
-      - run: cat ./form-email-api/api/wrangler.jsonc
+      - name: Override schema.toml
+        run: mv ./form-email-api/schema.toml ./form-email-api/api/schema.toml
+
+      - run: cat ./form-email-api/api/schema.toml
