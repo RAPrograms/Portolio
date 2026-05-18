@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
     import LocationIcon from "$icons/based-location.svg?raw"
     import LinkedInIcon from "$icons/linkedin.svg?raw"
@@ -6,6 +8,8 @@
     import EmailIcon from "$icons/email.svg?raw"
 
     import {
+        PUBLIC_CLOUDFLARE_SITE_KEY,
+
         PUBLIC_CONTACT_EMAIL,
         PUBLIC_GITHUB_USERNAME,
         PUBLIC_LINKEDIN_USERNAME,
@@ -13,7 +17,6 @@
         PUBLIC_LOCATION_TEXT,
         PUBLIC_LOCATION_URL
     } from '$env/static/public';
-    import { onMount } from "svelte";
 
     let jsEnabled = $state(false)
 
@@ -37,14 +40,12 @@
     </li>
 {/snippet}
 
+<svelte:head>
+    <script async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+</svelte:head>
+
 
 <div class="contact-methods">
-    <!--<Form url="https://submit-form.com/c5LGk94Ui">
-        <FormField title="Name" name="name"/>
-        <FormField title="Email" name="email_address" type="email"/>
-        <FormField title="Subject" name="subject"/>
-        <FormField title="What's on your mind?" name="message" kind="textarea"/>
-    </Form>-->
     <form action="mailto:your-email@example.com?subject=Inquiry" method="post" enctype="text/plain">
         
         <noscript>Without JavaScript enabled, this form will attempt to open your email client on submit</noscript>
@@ -66,7 +67,15 @@
             <textarea id="message" name="message" required></textarea>
         </label>
 
-        <button type="submit">Open email client</button>
+        <div class="cf-turnstile" data-sitekey="{PUBLIC_CLOUDFLARE_SITE_KEY}"></div>
+
+        <button type="submit">
+            {#if jsEnabled}
+                Send
+            {:else}
+                Open email client
+            {/if}
+        </button>
     </form>
 
     <aside>
