@@ -9,6 +9,18 @@ declare global {
 		// interface Platform {}
 	}
 
+	interface Window {
+       	turnstile?: {
+			render: (
+				target: string,
+				options: {
+					sitekey: string,
+					callback?: (token: string) => void
+				}
+			) => void
+		}
+    }
+
 	interface Project{
 		title: string
 		description: string

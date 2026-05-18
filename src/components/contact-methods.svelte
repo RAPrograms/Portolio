@@ -19,8 +19,29 @@
     } from '$env/static/public';
 
     let jsEnabled = $state(false)
+    let form: HTMLFormElement
 
-    onMount(() => jsEnabled = true)
+    onMount(() => {
+        jsEnabled = true
+        
+        // Loads Cloudflare Turnstile only when needed
+        // Prevents errors in terminal, which is not good for SEO
+        const observer = new IntersectionObserver(([{isIntersecting}]) => {
+            if(!isIntersecting)
+                return
+
+            window.turnstile.render("form .turnstile", {
+                sitekey: PUBLIC_CLOUDFLARE_SITE_KEY,
+                callback: function(token) {
+                    console.log(`Challenge Passed! Token: ${token}`);
+                },
+            })
+
+            observer.disconnect()
+        }, {threshold: 0.01});
+
+        observer.observe(form);
+    })
 </script>
 
 {#snippet details_card(
@@ -46,7 +67,7 @@
 
 
 <div class="contact-methods">
-    <form action="mailto:your-email@example.com?subject=Inquiry" method="post" enctype="text/plain">
+    <form bind:this={form} action="mailto:your-email@example.com?subject=Inquiry" method="post" enctype="text/plain">
         
         <noscript>Without JavaScript enabled, this form will attempt to open your email client on submit</noscript>
 
@@ -67,7 +88,10 @@
             <textarea id="message" name="message" required></textarea>
         </label>
 
-        <div class="cf-turnstile" data-sitekey="{PUBLIC_CLOUDFLARE_SITE_KEY}"></div>
+        <div class="turnstile"></div>
+        <noscript>
+            <style>form .turnstile{display: none}</style>
+        </noscript>
 
         <button type="submit">
             {#if jsEnabled}
