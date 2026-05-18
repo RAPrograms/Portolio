@@ -4,9 +4,6 @@
     import LinkedInIcon from "$icons/linkedin.svg?raw"
     import GithubIcon from "$icons/github.svg?raw"
     import EmailIcon from "$icons/email.svg?raw"
-    
-    import FormField from "$components/form/form-field.svelte";
-    import Form from "$components/form/form.svelte";
 
     import {
         PUBLIC_CONTACT_EMAIL,
@@ -16,6 +13,11 @@
         PUBLIC_LOCATION_TEXT,
         PUBLIC_LOCATION_URL
     } from '$env/static/public';
+    import { onMount } from "svelte";
+
+    let jsEnabled = $state(false)
+
+    onMount(() => jsEnabled = true)
 </script>
 
 {#snippet details_card(
@@ -37,12 +39,35 @@
 
 
 <div class="contact-methods">
-    <Form url="https://submit-form.com/c5LGk94Ui">
+    <!--<Form url="https://submit-form.com/c5LGk94Ui">
         <FormField title="Name" name="name"/>
         <FormField title="Email" name="email_address" type="email"/>
         <FormField title="Subject" name="subject"/>
         <FormField title="What's on your mind?" name="message" kind="textarea"/>
-    </Form>
+    </Form>-->
+    <form action="mailto:your-email@example.com?subject=Inquiry" method="post" enctype="text/plain">
+        
+        <noscript>Without JavaScript enabled, this form will attempt to open your email client on submit</noscript>
+
+        <label>
+            <div>Name</div>
+            <input type="text" name="name" required>
+        </label>
+
+        {#if jsEnabled}
+            <label>
+                <div>Email</div>
+                <input type="email" name="email" required>
+            </label>
+        {/if}
+    
+        <label>
+            <div>What's on your mind?</div>
+            <textarea id="message" name="message" required></textarea>
+        </label>
+
+        <button type="submit">Open email client</button>
+    </form>
 
     <aside>
         <ul>
@@ -82,6 +107,72 @@
             flex: 2;
         }
 
+        form{
+            @include variables.glass-card(15px);
+
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            & > label{
+                overflow: hidden;
+           
+                @include variables.glass-card(
+                    10px,
+                    0px,
+                    var(--glow-colour, rgba(255, 255, 255, 0.961)),
+                    var(--glow-size, 10%),
+                );
+
+                &:has(:is(input, textarea):is(:focus, :focus-within, :active)){
+                    --glow-colour:  var(--primary-colour);
+                    --glow-size: 200%;
+                }
+            
+                flex-direction: column;
+                text-align: left;
+                display: flex;
+
+                & > :first-child{
+                    padding: 10px 0 0 15px;
+                    font-size: .9rem;
+                    opacity: .75;
+                }
+
+                & > input, & > textarea{
+                    padding: 5px 15px 10px 15px;
+                    outline: transparent;
+                    font-size: 1.2rem;
+                    background: none;
+                    border: none;
+                }
+                
+                & > textarea{
+                    min-height: 150px;
+                    resize: vertical;
+                }
+            }
+
+            & > button[type=submit]{
+                @include variables.coloured-tag(var(--colour));
+
+                --colour: rgb(0, 200, 0);
+
+                transition: all ease-out 450ms;
+                margin-top: 10px;
+
+                &:hover{
+                    --colour: rgb(0, 116, 0);
+
+                    transition: all ease-in 250ms;
+                }
+            }
+
+            noscript{
+                @include variables.coloured-tag(rgb(255, 70, 70));
+            }
+        }
+
         & > aside {
             width: 100%;
             flex: 1;
@@ -89,6 +180,9 @@
             & > ul{
                 flex-direction: column;
                 display: flex;
+                position: sticky;
+                top: calc(var(--nav-height) + 10px);
+                left: 0;
                 gap: 20px;
 
                 & > li > a{
