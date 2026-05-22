@@ -17,7 +17,8 @@ declare global {
 					sitekey: string,
 					callback?: (token: string) => void
 				}
-			) => void
+			) => string
+			reset: (id: string) => void
 		}
     }
 

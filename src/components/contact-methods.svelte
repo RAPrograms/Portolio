@@ -18,8 +18,14 @@
         PUBLIC_LOCATION_URL
     } from '$env/static/public';
 
+    let status: "unsent" | "processing" | "sent" = $state("unsent")
+    let errors: Record<string, string> = $state({})
+    let isValidTurnstile = $state(false)
     let jsEnabled = $state(false)
     let form: HTMLFormElement
+
+    let turnstileWidget: string
+
 
     onMount(() => {
         jsEnabled = true
@@ -30,10 +36,11 @@
             if(!isIntersecting)
                 return
 
-            window.turnstile.render("form .turnstile", {
+            turnstileWidget = window.turnstile!.render("form .turnstile", {
                 sitekey: PUBLIC_CLOUDFLARE_SITE_KEY,
                 callback: function(token) {
-                    console.log(`Challenge Passed! Token: ${token}`);
+                    delete errors["turnstile"]
+                    isValidTurnstile = true
                 },
             })
 
@@ -42,6 +49,75 @@
 
         observer.observe(form);
     })
+
+    async function sendRequest(): Promise<undefined | [string, Record<string, string>]> {
+        const contact_url = (import.meta.env.DEV)? 
+            "http://localhost:8787" :
+            `https://contact-api.${window.location.host}`
+
+        const data = new FormData(form)
+
+        try {
+            const res = await fetch(contact_url, {
+                method: "post",
+                body: data
+            }) 
+
+            const json = await res.json()
+            if(!json["success"])
+                return [
+                    json["message"],
+                    json["details"]
+                ]
+            
+        } catch (error) {
+            return [
+                "general-error",
+                {"general": "Unable to submit. Please try directly via email"}
+            ]
+        }
+    }
+
+    async function submit(e: Event){
+        e.preventDefault()
+
+        errors = {}
+
+        if(!isValidTurnstile){
+            errors["turnstile"] = "Please try this capture again"
+            return
+        }
+
+        // Disable form input whilst request is sent
+        status = "processing"
+
+        // Send request
+        const error = await sendRequest()
+
+        // Show success form if no errors happened
+        if(!error){
+            status = "sent"
+            return
+        }
+
+        // Expand error details
+        const [message, details] = error
+
+        // Handle invalidated Turnstiles
+        if(message == "Invalid Cloudflare Turnstile token"){
+            errors["turnstile"] = "Please try this capture again"
+               
+            // Resets turnstile widget
+            window.turnstile!.reset(turnstileWidget)
+
+            status = "unsent"
+            return
+        }
+
+        
+        errors = details
+        status = "unsent"
+    }
 </script>
 
 {#snippet details_card(
@@ -67,39 +143,65 @@
 
 
 <div class="contact-methods">
-    <form bind:this={form} action="mailto:your-email@example.com?subject=Inquiry" method="post" enctype="text/plain">
-        
+    <form bind:this={form} onsubmit={submit} action="mailto:your-email@example.com?subject=Inquiry" method="post" enctype="text/plain">
         <noscript>Without JavaScript enabled, this form will attempt to open your email client on submit</noscript>
+        {#if status != "sent"}
+            <div>
+                <label>
+                    <div>Name</div>
+                    <input value="jaj" readonly={status != "unsent"} type="text" name="name" required>
+                </label>
+                {#if errors["name"]}<div class="error">{errors["name"]}</div>{/if}
+            </div>
 
-        <label>
-            <div>Name</div>
-            <input type="text" name="name" required>
-        </label>
-
-        {#if jsEnabled}
-            <label>
-                <div>Email</div>
-                <input type="email" name="email" required>
-            </label>
-        {/if}
-    
-        <label>
-            <div>What's on your mind?</div>
-            <textarea id="message" name="message" required></textarea>
-        </label>
-
-        <div class="turnstile"></div>
-        <noscript>
-            <style>form .turnstile{display: none}</style>
-        </noscript>
-
-        <button type="submit">
             {#if jsEnabled}
-                Send
-            {:else}
-                Open email client
+                <div>
+                    <label>
+                        <div>Email</div>
+                        <input value="Test@me.com" readonly={status != "unsent"} type="email" name="email" required>
+                    </label>
+                    {#if errors["email"]}<div class="error">{errors["email"]}</div>{/if}
+                </div>
+
+                <div>
+                    <label>
+                        <div>Subject</div>
+                        <input value="sjksadnj" readonly={status != "unsent"} type="text" name="subject" required>
+                    </label>
+                    {#if errors["subject"]}<div class="error">{errors["subject"]}</div>{/if}
+                </div>
             {/if}
-        </button>
+        
+            <div>
+                <label>
+                    <div>What's on your mind?</div>
+                    <textarea readonly={status != "unsent"} id="message" name="message" required>dasjndsajnk</textarea>
+                </label>
+                {#if errors["message"]}<div class="error">{errors["message"]}</div>{/if}
+            </div>
+            
+            {#if jsEnabled}
+                <div class="turnstile"></div>
+                {#if errors["turnstile"]}<div class="error">{errors["turnstile"]}</div>{/if}
+            {/if}
+
+            <button type="submit" disabled={status != "unsent" || (jsEnabled && !isValidTurnstile)}>
+                {#if jsEnabled}
+                    {#if status == "unsent"}
+                        Send
+                    {:else}
+                        <span class="loader"></span>
+                    {/if}
+                {:else}
+                    Open email client
+                {/if}
+            </button>
+        {:else}
+            <div class="conformation-message">
+                <div class="icon">{@html EmailIcon}</div>
+                <h3>Submitted</h3>
+            </div>
+        {/if}
     </form>
 
     <aside>
@@ -147,7 +249,7 @@
             flex-direction: column;
             gap: 20px;
 
-            & > label{
+            label{
                 overflow: hidden;
            
                 @include variables.glass-card(
@@ -184,6 +286,20 @@
                     min-height: 150px;
                     resize: vertical;
                 }
+
+                & > :is(input, textarea):read-only{
+                    opacity: 0.45;
+                    cursor:progress;
+                }
+            }
+
+            label ~ .error,
+            .turnstile ~ error{
+                @include variables.coloured-tag(red);
+
+                border-radius: 10px;
+                margin-top: 5px;
+                font-size: small;
             }
 
             & > button[type=submit]{
@@ -193,16 +309,49 @@
 
                 transition: all ease-out 450ms;
                 margin-top: 10px;
+            }
 
-                &:hover{
-                    --colour: rgb(0, 116, 0);
+            &:not(:has(:is(input, textarea):invalid))> button[type=submit]:not(:disabled):hover{
+                --colour: rgb(0, 116, 0);
 
-                    transition: all ease-in 250ms;
-                }
+                transition: all ease-in 250ms;
+            }
+
+            &:has(:is(input, textarea):invalid) > button[type=submit],
+            & > button[type=submit]:disabled{
+                --colour: grey;
+
+                cursor: unset !important;
             }
 
             noscript{
                 @include variables.coloured-tag(rgb(255, 70, 70));
+            }
+
+            &:has(.conformation-message){
+                justify-content: center;
+                align-items: center;
+            }
+
+            .conformation-message{
+                & > .icon{
+                    @include variables.coloured-tag(green);
+                    
+                    border-radius: 100%;
+                    place-items: center;
+                    aspect-ratio: 1/1;
+                    display: grid;
+
+                    & > :global(svg){
+                        width: 70%;
+                        height: 70%;
+                    }
+                }
+
+                & > h3{
+                    font-size: x-large;
+                    margin-top: 20px;
+                }
             }
         }
 
@@ -254,5 +403,48 @@
                 }
             }
         }
+
+
+        .loader{
+            display: block;
+            translate: 0 -100%;
+            margin: auto;
+        }
+
+        /* Styling code avalible from https://cssloaders.github.io/ */
+        .loader, .loader:before, .loader:after {
+            border-radius: 50%;
+            width: 2.5em;
+            height: 2.5em;
+            animation-fill-mode: both;
+            animation: bblFadInOut 1.8s infinite ease-in-out;
+        }
+        .loader {
+            color: #FFF;
+            font-size: 7px;
+            position: relative;
+            text-indent: -9999em;
+            transform: translateZ(0);
+            animation-delay: -0.16s;
+        }
+        .loader:before,
+        .loader:after {
+        content: '';
+            position: absolute;
+            top: 0;
+        }
+        .loader:before {
+            left: -3.5em;
+            animation-delay: -0.32s;
+        }
+        .loader:after {
+            left: 3.5em;
+        }
+
+        @keyframes bblFadInOut {
+            0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em }
+            40% { box-shadow: 0 2.5em 0 0 }
+        }
+                
     }
 </style>
