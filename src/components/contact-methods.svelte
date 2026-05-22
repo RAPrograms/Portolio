@@ -138,7 +138,7 @@
 {/snippet}
 
 <svelte:head>
-    <script async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+    <script async src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
 </svelte:head>
 
 
@@ -176,7 +176,7 @@
             <div>
                 <label>
                     <div>What's on your mind?</div>
-                    <textarea minlength="5" readonly={status != "unsent"} id="message" name="message" required>dasjndsajnk</textarea>
+                    <textarea minlength="5" readonly={status != "unsent"} id="message" name="message" required></textarea>
                 </label>
                 {#if errors["message"]}<div class="error">{errors["message"]}</div>{/if}
             </div>
