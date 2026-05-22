@@ -149,7 +149,7 @@
             <div>
                 <label>
                     <div>Name</div>
-                    <input value="jaj" readonly={status != "unsent"} type="text" name="name" required>
+                    <input readonly={status != "unsent"} type="text" name="name" required>
                 </label>
                 {#if errors["name"]}<div class="error">{errors["name"]}</div>{/if}
             </div>
@@ -158,7 +158,8 @@
                 <div>
                     <label>
                         <div>Email</div>
-                        <input value="Test@me.com" readonly={status != "unsent"} type="email" name="email" required>
+                        <input
+                            readonly={status != "unsent"} type="email" name="email" required>
                     </label>
                     {#if errors["email"]}<div class="error">{errors["email"]}</div>{/if}
                 </div>
@@ -166,7 +167,7 @@
                 <div>
                     <label>
                         <div>Subject</div>
-                        <input value="sjksadnj" readonly={status != "unsent"} type="text" name="subject" required>
+                        <input minlength="5" readonly={status != "unsent"} type="text" name="subject" required>
                     </label>
                     {#if errors["subject"]}<div class="error">{errors["subject"]}</div>{/if}
                 </div>
@@ -175,7 +176,7 @@
             <div>
                 <label>
                     <div>What's on your mind?</div>
-                    <textarea readonly={status != "unsent"} id="message" name="message" required>dasjndsajnk</textarea>
+                    <textarea minlength="5" readonly={status != "unsent"} id="message" name="message" required>dasjndsajnk</textarea>
                 </label>
                 {#if errors["message"]}<div class="error">{errors["message"]}</div>{/if}
             </div>
