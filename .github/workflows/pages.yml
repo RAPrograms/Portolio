@@ -65,7 +65,7 @@ jobs:
           PUBLIC_LOCATION_TEXT: ${{ vars.LOCATION_TEXT || '' }}
           PUBLIC_LOCATION_URL: ${{ vars.LOCATION_URL || '' }}
 
-          PUBLIC_BOTPOISON_KEY: ${{ vars.BOTPOISON_KEY }}
+          PUBLIC_CLOUDFLARE_SITE_KEY: ${{ vars.CLOUDFLARE_SITE_KEY }}
           
 
       - name: Upload artifact
