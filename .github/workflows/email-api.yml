@@ -18,6 +18,9 @@ jobs:
           submodules: 'recursive'
           set-safe-directory: 'true'
 
+      - name: Pull latest submodule commits
+        run: git submodule update --remote --recursive
+
       - name: Update worker default name
         run: jq '.name = "portfolio-contact-api"' ./form-email-api/api/wrangler.jsonc > ./form-email-api/temp.jsonc && mv ./form-email-api/temp.jsonc ./form-email-api/api/wrangler.jsonc
 
