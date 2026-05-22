@@ -28,7 +28,7 @@ jobs:
         run: mv ./form-email-api/schema.toml ./form-email-api/api/schema.toml
 
       - name: Override allowed_origins.json
-        run: echo '["https://raprograms.co.uk/"]' > form-email-api/api/allowed_origins.json
+        run: echo '["https://raprograms.co.uk"]' > form-email-api/api/allowed_origins.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
