@@ -2,7 +2,7 @@ name: Deploy form email api
 
 on:
   push:
-    branches: [ 6-email-form-upgrade ]
+    branches: [ main ]
   workflow_dispatch:
   
 env:
