@@ -3,7 +3,5 @@
 [email]
 pattern="email"
 
-[subject]
-
 [message]
 minlength=5
