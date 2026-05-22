@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
+          set-safe-directory: 'true'
 
       - name: Update worker default name
         run: jq '.name = "portfolio-contact-api"' ./form-email-api/api/wrangler.jsonc > ./form-email-api/temp.jsonc && mv ./form-email-api/temp.jsonc ./form-email-api/api/wrangler.jsonc
