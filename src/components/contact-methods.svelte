@@ -308,6 +308,11 @@
                 }
             }
 
+            .turnstile{
+                // Prevents Cloudflare Turnstile widget overflowing form on mobile
+                overflow: hidden;
+            }
+
             label ~ .error,
             .turnstile ~ error{
                 @include variables.coloured-tag(red);
