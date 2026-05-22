@@ -24,17 +24,27 @@
     let jsEnabled = $state(false)
     let form: HTMLFormElement
 
+    // svelte-ignore non_reactive_update
+    let setCloudflareTurnstileLoaded: () => void
+    let cloudflareTurnstileLoad = new Promise<void>(resolve => {
+        setCloudflareTurnstileLoaded = resolve
+    })
+
     let turnstileWidget: string
 
 
-    onMount(() => {
+    onMount(async() => {
         jsEnabled = true
         
+        // Prevents calling turnstile funtions before it has loaded
+        await cloudflareTurnstileLoad
+
         // Loads Cloudflare Turnstile only when needed
         // Prevents errors in terminal, which is not good for SEO
         const observer = new IntersectionObserver(([{isIntersecting}]) => {
             if(!isIntersecting)
                 return
+
 
             turnstileWidget = window.turnstile!.render("form .turnstile", {
                 sitekey: PUBLIC_CLOUDFLARE_SITE_KEY,
@@ -138,7 +148,7 @@
 {/snippet}
 
 <svelte:head>
-    <script async src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+    <script async defer onload={setCloudflareTurnstileLoaded} src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
 </svelte:head>
 
 
@@ -182,8 +192,12 @@
             </div>
             
             {#if jsEnabled}
-                <div class="turnstile"></div>
-                {#if errors["turnstile"]}<div class="error">{errors["turnstile"]}</div>{/if}
+                {#await cloudflareTurnstileLoad}
+                    <p>Loading Capture</p>
+                {:then _} 
+                    <div class="turnstile"></div>
+                    {#if errors["turnstile"]}<div class="error">{errors["turnstile"]}</div>{/if}
+                {/await}
             {/if}
 
             <button type="submit" disabled={status != "unsent" || (jsEnabled && !isValidTurnstile)}>
@@ -292,6 +306,11 @@
                     opacity: 0.45;
                     cursor:progress;
                 }
+            }
+
+            .turnstile{
+                // Prevents Cloudflare Turnstile widget overflowing form on mobile
+                overflow: hidden;
             }
 
             label ~ .error,
