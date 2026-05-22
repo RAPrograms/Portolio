@@ -1,0 +1,10 @@
+[name]
+
+[email]
+pattern="email"
+
+[subject]
+minlength=5
+
+[message]
+minlength=5

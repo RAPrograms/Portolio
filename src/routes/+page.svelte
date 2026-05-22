@@ -6,7 +6,7 @@
     import HighlightCard from "../components/highlight-card.svelte";
     import Hero from "../components/layout/hero.svelte";
 
-    import ContactSection from "../sections/contact.svelte"
+    import ContactSection from "../components/contact-methods.svelte"
     
     import { get_project_avalibility } from "$lib";
 
@@ -88,7 +88,14 @@
     </section>
 
     <div class="section-shape-wrapper">
-        <ContactSection/>
+        <section id="contact">
+            <header>
+                <h2>Contact Me</h2>
+                <p>Let us create magic!</p>
+            </header>
+
+            <ContactSection/>
+        </section>
     </div>
 </main>
 

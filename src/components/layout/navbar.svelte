@@ -32,7 +32,7 @@
                 {name: "About", url: "/#about"},
                 {name: "Technology", url: "/#technology"},
                 {name: "Projects", url: "/projects"},
-                {name: "Contact", url: "/#contact"},
+                {name: "Contact", url: "/contact"},
             ] as {name, url}}
                 <li>
                     <a href={url} onclick={handleLinkPress}>{name}</a>

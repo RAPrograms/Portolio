@@ -70,6 +70,7 @@
         position: relative;
         overflow: hidden;
         display: flex;
+        width: 100%;
         gap: 20px;
 
         // Adds background grid
