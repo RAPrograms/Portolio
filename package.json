@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dbsetup": "sqlite3 ./db/data.db < db/setup.sql",
+		"dbsetup": "sqlite3 ./data/data.db < data/setup.sql",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "bun run build && python3 -m http.server -d ./.dist",

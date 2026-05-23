@@ -37,17 +37,17 @@ jobs:
         run: bun install
 
       - name: Create sqlite database
-        run: sqlite3 ./db/data.db < ./db/setup.sql
+        run: sqlite3 ./data/data.db < ./data/setup.sql
 
       # Exports all public Github repos, from owner, into a JSON file
       - name: Fetch repositories details
         run: |
-          gh repo list ${{ github.repository_owner }} --limit 1000 --source --public --json description,homepageUrl,id,languages,description,repositoryTopics,name,primaryLanguage,repositoryTopics,url > ./db/repos.json
+          gh repo list ${{ github.repository_owner }} --limit 1000 --source --public --json description,homepageUrl,id,languages,description,repositoryTopics,name,primaryLanguage,repositoryTopics,url > ./data/repos.json
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Seed Github repositories into project table
-        run: bun ./db/seed_repositories.ts
+        run: bun ./data/seed_repositories.ts
         env:
           GITHUB_USERNAME: ${{ github.repository_owner }}
           FEATURED_PROJECTS: ${{ vars.FEATURED_PROJECTS }}

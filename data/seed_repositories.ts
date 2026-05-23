@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { Database } from "bun:sqlite";
 import { TOML } from "bun";
 
-const db = new Database('./db/data.db', { strict: true });
+const db = new Database('./data/data.db', { strict: true });
 
 async function seedProjects(){
     const insert = db.prepare(
@@ -61,7 +61,7 @@ async function seedProjects(){
         return repos.length
     });
 
-    const json = await readFile('./db/repos.json', 'utf8').then((raw: string) => JSON.parse(raw));
+    const json = await readFile('./data/repos.json', 'utf8').then((raw: string) => JSON.parse(raw));
 
     insertRepos(json);
 }
