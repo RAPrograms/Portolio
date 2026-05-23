@@ -12,7 +12,7 @@
     } as const)
 
     interface Technology {
-        category: string,
+        categories: string[],
         level: keyof typeof levels,
         icon?: string
     }
@@ -20,7 +20,7 @@
     let { data }: {
         data: {
             technologies: Record<string, Technology>,
-            breakdown: Record<string, Array<string>>
+            categories: Map<string, string>
         }
     } = $props();
 
@@ -31,32 +31,47 @@
     })
 </script>
 
-{#snippet card(name: string)}
-    {@const record = data["technologies"][name]}
-
-    <svelte:element this={(jsEnabled)? "a" : "article"} href="/projects?tech={name.toLowerCase()}" class="technology">
-        <img src="/tag-icons/{record["icon"] || name.toLowerCase().replace(" ", "-")}.svg" width="50" aria-hidden="true" alt="{name} logo">
-        <div class="name">{name}</div>
-        <div class="level" title={levels[record["level"]?.toLowerCase()]} data-level={record["level"]?.toLowerCase()}>{record["level"]}</div>
-    </svelte:element>
-{/snippet}
-
 
 <Hero title="Technologies" flavorText="Find && Research && Impliment && Repeat" backURL="/">
     <p>You can never have enough technology</p>
 </Hero>
 
 <main id="id">
-    {#each Object.entries(data["breakdown"]) as [category, entries]}
-        <section id={category.toLowerCase()}>
-            <h2>{category}</h2>
-            <div>
-                {#each entries as name}
-                    {@render card(name)}
-                {/each}
-            </div>
-        </section>
-    {/each}
+    <header>
+        <label>
+            <input type="radio" name="category" value="" checked>
+            <div class="name">All</div>
+        </label>
+
+        {#each data["categories"] as [key, category]}
+            <label>
+                <input type="radio" name="category" value="{key}">
+                <div class="name">{category}</div>
+            </label>
+        {/each}
+    </header>
+
+    <section class="entries">
+        {#each Object.entries(data["technologies"]) as [name, details]}
+            {@const categoryFilters = details["categories"].map(c => `filter-${c.toLowerCase().replace(" ", "-")}`).join(" ")}
+        
+            <svelte:element
+                this={(jsEnabled)? "a" : "article"}
+                href="/projects?tech={name.toLowerCase()}"
+                class="technology {categoryFilters}"
+            >
+
+                <img src="/tag-icons/{details["icon"] || name.toLowerCase().replace(" ", "-")}.svg" width="50" aria-hidden="true" alt="{name} logo">
+                <div class="name">{name}</div>
+                <div
+                    class="level"
+                    title={levels[details["level"]?.toLowerCase()]}
+                    data-level={details["level"]?.toLowerCase()}>
+                    {details["level"]}
+                </div>
+            </svelte:element>
+        {/each}
+    </section>
 </main>
 
 <style lang="scss">
@@ -65,25 +80,41 @@
     main#id{
         max-width: min(var(--max-content-width), 80vw);
         flex-direction: column;
+        align-items: center;
         display: flex;
-        margin: auto;
         width: 100%;
-        gap: 50px;
+        gap: 20px;
+    }
 
-        & > section{
-            & > h2 {
-                text-align: center;
-                margin-bottom: 20px;
-            }
+    header{
+        justify-content: center;
+        flex-wrap: wrap;
+        display: flex;
+        gap: 10px;
 
-            & > div{
-                grid-template-columns: repeat(auto-fit, 290px);
-                display: grid;
-                justify-content: center;
-                gap: 20px;  
+        input[type=radio]{
+            display: none;
+        }
+
+        label{
+            @include variables.tag(var(--colour, grey));
+
+            text-align: center;
+            min-width: 50px;
+            cursor: pointer;
+
+            &:has(input[type=radio]:checked){
+                --colour: red;
             }
         }
-        
+    }
+
+    .entries{
+        grid-template-columns: repeat(auto-fit, 290px);
+        justify-content: center;
+        display: grid;
+        width: 100%;
+        gap: 20px;  
 
         .technology{
             background-color: rgba(242, 242, 242, .0471);
