@@ -23,7 +23,8 @@
             class="preview"
             target="_blank"
             this={(data.demo_url)? "a" : "article"}
-            href={data.demo_url}>
+            href={data.demo_url}
+            aria-label="{data['title']} demo link">
 
             <div class="containor">
                 <span class="caption">{caption}</span>
@@ -33,7 +34,7 @@
                 {/if}
             </div>
             
-            <img src={get_project_image_uri(data)} aria-hidden="true" alt="">
+            <img src={get_project_image_uri(data)} loading="lazy" aria-hidden="true" alt="">
         </svelte:element>
     </div>
 
@@ -41,7 +42,7 @@
         <h3>
             <span>{data.title}</span>
             {#if data.repository_url}
-                <a href="{data.repository_url}" target="_blank">
+                <a href="{data.repository_url}" target="_blank" aria-label="{data["title"]} repo link">
                     {@html GithubIcon}
                 </a>
             {/if}

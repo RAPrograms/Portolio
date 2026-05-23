@@ -69,6 +69,10 @@
 	});
 </script>
 
+<svelte:head>
+    <title>Projects | RAPrograms</title>
+</svelte:head>
+
 <!-- Reduces page size by using svg clones -->
 <svg style="display: none;">
     {#each [GithubIcon, EyeIcon] as raw}
@@ -86,7 +90,7 @@
     <header class="require-javascript">
         <label>
             {@html SearchIcon}
-            <input type="search" bind:value={query_filter}>
+            <input type="search" placeholder="Search" bind:value={query_filter}>
         </label>
 
         <select name="project-type" bind:value={type_filter}>

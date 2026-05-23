@@ -30,9 +30,9 @@
         <ul class="links">
             {#each [
                 {name: "About", url: "/#about"},
-                {name: "Technology", url: "/technologies"},
-                {name: "Projects", url: "/projects"},
-                {name: "Contact", url: "/contact"},
+                {name: "Technology", url: "/technologies/"},
+                {name: "Projects", url: "/projects/"},
+                {name: "Contact", url: "/contact/"},
             ] as {name, url}}
                 <li>
                     <a href={url} onclick={handleLinkPress}>{name}</a>

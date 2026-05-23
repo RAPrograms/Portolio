@@ -3,6 +3,10 @@
     import Hero from "../../components/layout/hero.svelte"
 </script>
 
+<svelte:head>
+    <title>Contact | RAPrograms</title>
+</svelte:head>
+
 <Hero title="Contact Me" flavorText="Idea && Talk && Create && Repeat" backURL="/">
     <p>Lets us create magic together!</p>
 </Hero>
