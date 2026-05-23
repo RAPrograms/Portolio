@@ -1,0 +1,84 @@
+{
+    "HTML": {
+        "categories": "Frontend",
+        "level": "Expert"
+    },
+    "CSS": {
+        "categories": "Frontend",
+        "level": "Expert"
+    },
+    "SCSS": {
+        "categories": "Frontend",
+        "level": "Expert"
+    },
+    "JavaScript": {
+        "categories": ["Frontend", "Backend"],
+        "level": "Expert"
+    },
+    "TypeScript": {
+        "categories": ["Frontend", "Backend"],
+        "level": "Proficient"
+    },
+    "HTMX": {
+        "categories": "Frontend",
+        "level": "Competent"
+    },
+    "Svelte": {
+        "categories": "Frontend",
+        "level": "Master"
+    },
+    "Java": {
+        "categories": "Languages",
+        "level": "Competent"
+    },
+    "Rust": {
+        "categories": "Languages",
+        "level": "Advanced Beginner"
+    },
+    "Python": {
+        "categories": "Languages",
+        "level": "Expert"
+    },
+    "SvelteKit": {
+        "categories": ["Frontend", "Backend"],
+        "icon": "svelte",
+        "level": "Expert"
+    },
+    "NodeJS": {
+        "categories": "Backend",
+        "level": "Proficient"
+    },
+    "Rocket.rs": {
+        "categories": "Backend",
+        "level": "Advanced Beginner"
+    },
+    "FastAPI": {
+        "categories": "Backend",
+        "level": "Expert"
+    },
+    "MongoDB": {
+        "categories": "Database",
+        "level": "proficient"
+    },
+    "SQL": {
+        "categories": "Database",
+        "icon": "database",
+        "level": "advanced beginner"
+    },
+    "Docker": {
+        "categories": "Tools",
+        "level": "proficient"
+    },
+    "Git": {
+        "categories": "Tools",
+        "level": "proficient"
+    },
+    "Github Actions": {
+        "categories": "CI/CD",
+        "level": "competent"
+    },
+    "Figma": {
+        "categories": "Tools",
+        "level": "expert"
+    }
+}
