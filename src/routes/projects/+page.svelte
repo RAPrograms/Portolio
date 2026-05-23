@@ -52,8 +52,8 @@
     {/each}
 </svg>
 
-<Hero title="Skills & Tech" flavorText="Think && Design && Create && Repeat" backURL="/">
-    <p>You can never have enough technology</p>
+<Hero title="Projects" flavorText="Think && Design && Create && Repeat" backURL="/">
+    <p>I may or may not have a project creation problem XD</p>
 </Hero>
 
 <main id="main">
