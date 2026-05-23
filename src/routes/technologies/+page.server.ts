@@ -4,21 +4,34 @@ import tech from "../../../data/technologies.json"
 
 export const prerender = true;
 
-// This will bake the project records into the page
+// This will bake the technology records into the page
 export const load: PageServerLoad = async ({ params }) => {
     const uniqueCategories = new Map()
+    const technologies: Record<string, Record<string, any>> = {}
 
     for(const [name, details] of Object.entries(tech)){
-        if(!Array.isArray(details["categories"]))
-            details["categories"] = [details["categories"]]
+        technologies[name] = {
+            "level": details["level"],
+            "icon": details["icon"],
+            "categories": []
+        }
 
-        for(const category of details["categories"]){
-            uniqueCategories.set(category.toLowerCase(), category)
+        // Checks if the catgory is a string (single catgory)
+        const isSingleCategory = !Array.isArray(details["categories"])
+
+
+        for(const category of isSingleCategory? [details["categories"]] : details["categories"]){
+            const key = category.toLowerCase()
+            
+            if(!uniqueCategories.has(key))
+                uniqueCategories.set(key, category)
+
+            technologies[name]["categories"].push(key)
         }
     }
 
     return {
-        technologies: tech,
+        technologies,
         categories: uniqueCategories
     };
 };

@@ -24,6 +24,8 @@
         }
     } = $props();
 
+    let category_filter = $state("")
+
     let jsEnabled = $state(false)
 
     onMount(() => {
@@ -37,50 +39,53 @@
 </Hero>
 
 <main id="id">
-    <header>
-        <label>
-            <input type="radio" name="category" value="" checked>
-            <div class="name">All</div>
-        </label>
-
-        {#each data["categories"] as [key, category]}
+    {#if jsEnabled}
+        <header>
             <label>
-                <input type="radio" name="category" value="{key}">
-                <div class="name">{category}</div>
+                <input type="radio" name="category" value="" bind:group={category_filter}>
+                <div class="name">All</div>
             </label>
-        {/each}
-    </header>
+
+            {#each data["categories"] as [key, category]}
+                <label>
+                    <input type="radio" name="category" value="{key}" bind:group={category_filter}>
+                    <div class="name">{category}</div>
+                </label>
+            {/each}
+        </header>
+    {/if}
 
     <section class="entries">
         {#each Object.entries(data["technologies"]) as [name, details]}
-            {@const categoryFilters = details["categories"].map(c => `filter-${c.toLowerCase().replace(" ", "-")}`).join(" ")}
-        
-            <svelte:element
-                this={(jsEnabled)? "a" : "article"}
-                href="/projects?tech={name.toLowerCase()}"
-                class="technology {categoryFilters}"
-            >
+            {#if category_filter == "" || details["categories"].includes(category_filter)}
+                <svelte:element
+                    this={(jsEnabled)? "a" : "article"}
+                    href="/projects?tech={name.toLowerCase()}"
+                    class="technology-card"
+                >
 
-                <img src="/tag-icons/{details["icon"] || name.toLowerCase().replace(" ", "-")}.svg" width="50" aria-hidden="true" alt="{name} logo">
-                <div class="name">{name}</div>
-                <div
-                    class="level"
-                    title={levels[details["level"]?.toLowerCase()]}
-                    data-level={details["level"]?.toLowerCase()}>
-                    {details["level"]}
-                </div>
-            </svelte:element>
+                    <img src="/tag-icons/{details["icon"] || name.toLowerCase().replace(" ", "-")}.svg" width="50" aria-hidden="true" alt="{name} logo">
+                    <div class="name">{name}</div>
+                    <div
+                        class="level"
+                        title={levels[details["level"]?.toLowerCase()]}
+                        data-level={details["level"]?.toLowerCase()}>
+                        {details["level"]}
+                    </div>
+                </svelte:element>
+            {/if}
         {/each}
     </section>
 </main>
 
 <style lang="scss">
-    @use "$styling/_variables.scss" as variables;
+    @use "$styling/_variables.scss" as variables; 
 
     main#id{
         max-width: min(var(--max-content-width), 80vw);
         flex-direction: column;
         align-items: center;
+        min-height: 400px;
         display: flex;
         width: 100%;
         gap: 20px;
@@ -116,7 +121,7 @@
         width: 100%;
         gap: 20px;  
 
-        .technology{
+        .technology-card{
             background-color: rgba(242, 242, 242, .0471);
             outline: 1px solid rgba(117, 117, 117, .45);
             border-radius: 20px;
