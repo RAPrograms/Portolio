@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import Hero from "../../components/layout/hero.svelte";
 
     const levels = Object.freeze({
@@ -22,16 +23,22 @@
             breakdown: Record<string, Array<string>>
         }
     } = $props();
+
+    let jsEnabled = $state(false)
+
+    onMount(() => {
+        jsEnabled = true
+    })
 </script>
 
 {#snippet card(name: string)}
     {@const record = data["technologies"][name]}
 
-    <article>
+    <svelte:element this={(jsEnabled)? "a" : "article"} href="/projects?tech={name.toLowerCase()}" class="technology">
         <img src="/tag-icons/{record["icon"] || name.toLowerCase().replace(" ", "-")}.svg" width="50" aria-hidden="true" alt="{name} logo">
         <div class="name">{name}</div>
         <div class="level" title={levels[record["level"]?.toLowerCase()]} data-level={record["level"]?.toLowerCase()}>{record["level"]}</div>
-    </article>
+    </svelte:element>
 {/snippet}
 
 
@@ -78,7 +85,7 @@
         }
         
 
-        article{
+        .technology{
             background-color: rgba(242, 242, 242, .0471);
             outline: 1px solid rgba(117, 117, 117, .45);
             border-radius: 20px;
@@ -103,8 +110,9 @@
             }
 
             .name{
-                grid-area: Name;
                 font-size: large;
+                grid-area: Name;
+                color: white;
             }
 
             .level{
