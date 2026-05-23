@@ -8,28 +8,38 @@ const db = new Database('./data/data.db', { strict: true });
 
 async function seedProjects(){
     const insert = db.prepare(
-        `INSERT INTO projects (title, description, type, image_uri, repository_url, demo_url, tags)
-        VALUES (:title, :description, :type, :image_uri, :repository_url, :demo_url, :tags)`
+        `INSERT INTO projects (title, description, languages, type, image_uri, repository_url, demo_url, tags)
+        VALUES (:title, :description, :languages, :type, :image_uri, :repository_url, :demo_url, :tags)`
     );
 
     const insertRepos = db.transaction(repos => {
         for (const repo of repos){
             // Hide repos that are not finished
             // Indicated by a lack of a description
-            if(repo["description"] == "")
-                continue
+            //if(repo["description"] == "")
+            //    continue
 
             // Prevent processing github main repo
-            if(import.meta.env.GITHUB_USERNAME.toLowerCase() == repo["name"].toLowerCase())
-                continue
-            
+            //if(import.meta.env.GITHUB_USERNAME.toLowerCase() == repo["name"].toLowerCase())
+            //    continue
+
             const record: Record<string, any> = {
                 "title": repo["name"],
                 "description": repo["description"],
                 "repository_url": (repo["url"] != "")? repo["url"]:null,
                 "demo_url": repo["homepageUrl"] ?? null,
+                "languages": [],
                 "image_uri": null //TODO: add images
             }
+
+            
+            for(const lang of repo["languages"]){
+                if(lang["node"] == undefined)
+                    continue
+
+                record["languages"].push(lang["node"]["name"].toLowerCase())
+            }
+
 
             const projectType: Array<typeof ProjectTypes> = []
             const projectTags: Array<Stack> = []
@@ -38,7 +48,7 @@ async function seedProjects(){
                 // Check for project type tags
                 // @ts-ignore
                 if(ProjectTypes[tag]){
-                    projectType.push(tag)
+                    projectType.push(tag.toLowerCase())
                     continue
                 }
 
@@ -52,9 +62,10 @@ async function seedProjects(){
                 }
             }
 
+            record["languages"] = JSON.stringify(record["languages"])
             record["type"] = JSON.stringify(projectType)
             record["tags"] = JSON.stringify(projectTags)
-            
+
             insert.run(record);
         }
 

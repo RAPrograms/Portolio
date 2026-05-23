@@ -15,6 +15,7 @@ CREATE TABLE projects (
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     type VARCHAR(20) NOT NULL,
+    languages TEXT NOT NULL,
 
     -- The code will use the github opengraph api if null
     image_uri TEXT,
