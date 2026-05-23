@@ -33,6 +33,9 @@
     })
 </script>
 
+<svelte:head>
+    <title>Technologies | RAPrograms</title>
+</svelte:head>
 
 <Hero title="Technologies" flavorText="Find && Research && Impliment && Repeat" backURL="/">
     <p>You can never have enough technology</p>

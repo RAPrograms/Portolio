@@ -14,6 +14,10 @@
     let { data }: PageProps = $props();
 </script>
 
+<svelte:head>
+    <title>RAPrograms</title>
+</svelte:head>
+
 {#snippet avalibilityNotice()}
     {#if get_project_avalibility()}
         <div class="hero-availability-tag">Available for projects</div>
@@ -66,7 +70,7 @@
             <div>
                 <InfiniteHorizontalScroll>
                     {#each data["technologies"] as {name, icon}}
-                        <img src="/tag-icons/{icon}.svg" width="50" aria-hidden="true" alt="{name} logo" title={name}>
+                        <img src="/tag-icons/{icon}.svg" width="50" height="50" aria-hidden="true" alt="{name} logo" title={name}>
                     {/each}
                 </InfiniteHorizontalScroll>
             </div>

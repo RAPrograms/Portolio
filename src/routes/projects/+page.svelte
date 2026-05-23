@@ -69,6 +69,10 @@
 	});
 </script>
 
+<svelte:head>
+    <title>Projects | RAPrograms</title>
+</svelte:head>
+
 <!-- Reduces page size by using svg clones -->
 <svg style="display: none;">
     {#each [GithubIcon, EyeIcon] as raw}
