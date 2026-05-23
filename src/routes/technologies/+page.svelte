@@ -38,7 +38,7 @@
     <p>You can never have enough technology</p>
 </Hero>
 
-<main id="id">
+<main id="main">
     {#if jsEnabled}
         <header>
             <label>
@@ -81,7 +81,7 @@
 <style lang="scss">
     @use "$styling/_variables.scss" as variables; 
 
-    main#id{
+    main#main{
         max-width: min(var(--max-content-width), 80vw);
         flex-direction: column;
         align-items: center;

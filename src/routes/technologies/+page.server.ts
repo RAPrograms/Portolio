@@ -11,16 +11,17 @@ export const load: PageServerLoad = async ({ params }) => {
 
     for(const [name, details] of Object.entries(tech)){
         technologies[name] = {
-            "level": details["level"],
+            // @ts-ignore
             "icon": details["icon"],
+            "level": details["level"],
             "categories": []
         }
 
         // Checks if the catgory is a string (single catgory)
         const isSingleCategory = !Array.isArray(details["categories"])
 
-
-        for(const category of isSingleCategory? [details["categories"]] : details["categories"]){
+        // Loop though all categories
+        for(const category of (isSingleCategory? [details["categories"]] : details["categories"]) as string[]){
             const key = category.toLowerCase()
             
             if(!uniqueCategories.has(key))

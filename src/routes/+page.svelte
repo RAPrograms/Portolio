@@ -9,6 +9,7 @@
     import ContactSection from "../components/contact-methods.svelte"
     
     import { get_project_avalibility } from "$lib";
+    import InfiniteHorizontalScroll from "../components/infinite-horizontal-scroll.svelte";
 
     let { data }: PageProps = $props();
 </script>
@@ -56,15 +57,21 @@
     </section>
 
     <div class="section-shape-wrapper">
-        <section id="knowlege">
+        <section id="technologies">
             <header>
-                <h2>Skills & Tools</h2>
+                <h2>Technologies</h2>
                 <p>Can you tell I love to experement</p>
             </header>
 
             <div>
-                <!-- TODO -->
+                <InfiniteHorizontalScroll>
+                    {#each data["technologies"] as {name, icon}}
+                        <img src="/tag-icons/{icon}.svg" width="50" aria-hidden="true" alt="{name} logo" title={name}>
+                    {/each}
+                </InfiniteHorizontalScroll>
             </div>
+
+            <a class="additional-resources" href="/technologies#main">See all technologies</a>
         </section>
     </div>
 
@@ -199,11 +206,26 @@
         @include coloured-tag(var(--primary-colour));
     }
 
+    section > div{
+        width: 100%;
+    }
+
+    section#technologies > div{
+        justify-content: center;
+        margin-top: 20px;
+        display: flex;
+
+        img{
+            filter: grayscale(100%);
+            height: 60px;
+            width: 60px;
+        }
+    }
+
     section#featured-projects > div{
         flex-direction: column;
         padding-top: 40px;
         display: flex;
-        width: 100%;
         gap: 40px;
     }
 
