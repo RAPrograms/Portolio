@@ -1,6 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
+    import NoscriptWarning from "./noscript-warning.svelte";
+    
     import RightArrowIcon from "$icons/right-line-arrow.svg?raw"
     import LocationIcon from "$icons/based-location.svg?raw"
     import LinkedInIcon from "$icons/linkedin.svg?raw"
@@ -154,7 +156,7 @@
 
 <div class="contact-methods">
     <form bind:this={form} onsubmit={submit} action="mailto:your-email@example.com?subject=Inquiry" method="post" enctype="text/plain">
-        <noscript>Without JavaScript enabled, this form will attempt to open your email client on submit</noscript>
+        <NoscriptWarning icon={false}>Without JavaScript enabled, this form will attempt to open your email client on submit</NoscriptWarning>
         {#if status != "sent"}
             <div>
                 <label>

@@ -31,7 +31,7 @@ export const Technologies = Object.freeze({
     stripe: "Stripe",
 
     // Databases
-    sqlite: "SQLite",
+    sqlite: "SQLite [database]",
     mongodb: "MongoDB",
 
     // Cloudflare services

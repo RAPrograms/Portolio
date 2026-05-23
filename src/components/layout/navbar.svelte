@@ -30,7 +30,7 @@
         <ul class="links">
             {#each [
                 {name: "About", url: "/#about"},
-                {name: "Technology", url: "/#technology"},
+                {name: "Technology", url: "/technologies"},
                 {name: "Projects", url: "/projects"},
                 {name: "Contact", url: "/contact"},
             ] as {name, url}}

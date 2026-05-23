@@ -13,7 +13,7 @@
 </script>
 
 <article class:ghosted={ghosted}>
-    <div class="image-containor" style="--image-uri: url('{data.image_uri}')">
+    <div class="image-containor">
         <img src={get_project_image_uri(data)} alt="Project Preview" loading="lazy">
     </div>
 
@@ -59,6 +59,7 @@
         }
 
         .image-containor{
+            background-color: #292929;
             justify-content: center;
             border-radius: 10px;
             position: relative;
@@ -66,19 +67,6 @@
             overflow: hidden;
             display: flex;
             width: 100%;
-
-            &::before{
-                filter: grayscale(100%) blur(3px);
-                background-image: var(--image-uri);
-                background-position: center;
-                background-size: cover;
-                position: absolute;
-                height: 100%;
-                content: "";
-                width: 100%;
-                z-index: -1;
-                scale: 1.1;
-            }
 
             img{
                 object-fit: contain;

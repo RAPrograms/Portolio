@@ -20,6 +20,9 @@ export const load: PageServerLoad = async ({ params }) => {
 					record["type"] = [record["type"]]
 				}
 
+				// Load project langauges
+            	record["languages"] = JSON.parse(record["languages"])
+				
 				return record
 			})
 	};

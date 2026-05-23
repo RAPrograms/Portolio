@@ -4,12 +4,12 @@ import { readFile } from 'node:fs/promises';
 import { Database } from "bun:sqlite";
 import { TOML } from "bun";
 
-const db = new Database('./db/data.db', { strict: true });
+const db = new Database('./data/data.db', { strict: true });
 
 async function seedProjects(){
     const insert = db.prepare(
-        `INSERT INTO projects (title, description, type, image_uri, repository_url, demo_url, tags)
-        VALUES (:title, :description, :type, :image_uri, :repository_url, :demo_url, :tags)`
+        `INSERT INTO projects (title, description, languages, type, image_uri, repository_url, demo_url, tags)
+        VALUES (:title, :description, :languages, :type, :image_uri, :repository_url, :demo_url, :tags)`
     );
 
     const insertRepos = db.transaction(repos => {
@@ -22,14 +22,24 @@ async function seedProjects(){
             // Prevent processing github main repo
             if(import.meta.env.GITHUB_USERNAME.toLowerCase() == repo["name"].toLowerCase())
                 continue
-            
+
             const record: Record<string, any> = {
                 "title": repo["name"],
                 "description": repo["description"],
                 "repository_url": (repo["url"] != "")? repo["url"]:null,
                 "demo_url": repo["homepageUrl"] ?? null,
+                "languages": [],
                 "image_uri": null //TODO: add images
             }
+
+            
+            for(const lang of repo["languages"]){
+                if(lang["node"] == undefined)
+                    continue
+
+                record["languages"].push(lang["node"]["name"].toLowerCase())
+            }
+
 
             const projectType: Array<typeof ProjectTypes> = []
             const projectTags: Array<Stack> = []
@@ -38,7 +48,7 @@ async function seedProjects(){
                 // Check for project type tags
                 // @ts-ignore
                 if(ProjectTypes[tag]){
-                    projectType.push(tag)
+                    projectType.push(tag.toLowerCase())
                     continue
                 }
 
@@ -52,16 +62,17 @@ async function seedProjects(){
                 }
             }
 
+            record["languages"] = JSON.stringify(record["languages"])
             record["type"] = JSON.stringify(projectType)
             record["tags"] = JSON.stringify(projectTags)
-            
+
             insert.run(record);
         }
 
         return repos.length
     });
 
-    const json = await readFile('./db/repos.json', 'utf8').then((raw: string) => JSON.parse(raw));
+    const json = await readFile('./data/repos.json', 'utf8').then((raw: string) => JSON.parse(raw));
 
     insertRepos(json);
 }

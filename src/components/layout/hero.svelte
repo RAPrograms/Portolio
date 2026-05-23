@@ -129,6 +129,7 @@
 
                 & > :nth-child(2){
                     background-image: linear-gradient(90deg, #DF3A3A, #f57387);
+                    text-transform: capitalize;
                     background-clip: text;
                     color: transparent;
                     margin-top: .5rem;
