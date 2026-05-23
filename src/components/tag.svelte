@@ -31,7 +31,7 @@
     href={isProjectsLink? `/projects?tech=${name}#main`:undefined}
 >
     {#if icon != ""}
-        <img src="/tag-icons/{icon}.svg" height="15" aria-hidden="true" alt="">
+        <img src="/tag-icons/{icon}.svg" width="15" height="15" aria-hidden="true" alt="">
     {/if}
     {name}
 </svelte:element>
