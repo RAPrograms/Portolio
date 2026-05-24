@@ -10,7 +10,7 @@
     import EyeIcon from "$icons/eye.svg?raw"
     import NoscriptWarning from "../../components/noscript-warning.svelte";
 
-    let { data }:{ data: { records: Array<Project> } } = $props();
+    let { data }:{ data: { records: Array<Project>, validIcons: Set<string> } } = $props();
 
     const url_filter = (() => {
         if(!browser)
@@ -112,10 +112,10 @@
         {/if}
 
         {#each matches as projectData}
-            <ProjectCard data={projectData} ghosted={false}/>
+            <ProjectCard validIcons={data["validIcons"]} data={projectData} ghosted={false}/>
         {/each}
         {#each exclusions as projectData}
-            <ProjectCard data={projectData} ghosted={true}/>
+            <ProjectCard validIcons={data["validIcons"]} data={projectData} ghosted={true}/>
         {/each}
     </section>
 </main>
