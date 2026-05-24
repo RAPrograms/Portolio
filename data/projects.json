@@ -2,7 +2,7 @@
     "hangman": {
         "title": "Hangman",
         "description": "A clean, modern, and reactive implementation of the classic Hangman word-guessing game built with Svelte.",
-        "type": ["web", "frontend"],
+        "type": "frontend",
         "languages": ["svelte", "typescript", "scss", "css", "javascript", "html"],
         "code_url": "https://github.com/RAPrograms/Hangman",
         "demo_url": "https://raprograms.github.io/Hangman/",
@@ -13,7 +13,7 @@
     "icon-downloader": {
         "title": "Lucide Icons CLI Downloader",
         "description": "A clean, modern, and reactive implementation of the classic Hangman word-guessing game built with Svelte.",
-        "type": "cli",
+        "type": "tools",
         "languages": "go",
         "tags": ["cli", "lucide", "icons", "terminal"],
         "code_url": "https://github.com/RAPrograms/Lucide-Icons-Downloader",
