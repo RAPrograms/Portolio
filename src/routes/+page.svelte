@@ -88,9 +88,10 @@
         <div>
             {#each data["featuredProjects"] as details}
                 <ProjectCard
-                    data={details}
+                    data={details["project"]}
                     theme={details["theme"]}
                     caption={details["caption"]}
+                    validIcons={data["validIcons"]}
                 />
             {/each}
         </div>

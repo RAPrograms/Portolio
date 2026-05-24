@@ -1,0 +1,45 @@
+{
+    "hangman": {
+        "title": "Hangman",
+        "description": "A clean, modern, and reactive implementation of the classic Hangman word-guessing game built with Svelte.",
+        "type": "frontend",
+        "languages": ["svelte", "typescript", "scss", "css", "javascript", "html"],
+        "code_url": "https://github.com/RAPrograms/Hangman",
+        "demo_url": "https://raprograms.github.io/Hangman/",
+        "tags": ["game", "svelte", "web", "pwa"],
+        "preview_uri": "https://github.com/user-attachments/assets/68e27d59-8b54-4bde-bc17-0174edcf9873"
+    },
+
+    "icon-downloader": {
+        "title": "Lucide Icons CLI Downloader",
+        "description": "A clean, modern, and reactive implementation of the classic Hangman word-guessing game built with Svelte.",
+        "type": "tools",
+        "languages": "go",
+        "tags": ["cli", "lucide", "icons", "terminal"],
+        "code_url": "https://github.com/RAPrograms/Lucide-Icons-Downloader",
+        "demo_url": null,
+        "preview_uri": "https://github.com/user-attachments/assets/b5b7d724-228b-424a-be25-4abf4ea0063e"
+    },
+
+    "wordle-api": {
+        "title": "Rust Wordle API",
+        "description": "This is a simple rest api for wordle projects. Make in rust with rocket as the framework. Every day at midnight it will pick a random word from the words.txt file.",
+        "type": "backend",
+        "languages": "go",
+        "tags": ["api", "wordle"],
+        "code_url": "https://github.com/RAPrograms/Rust-Wordle-Api",
+        "demo_url": null,
+        "preview_uri": null
+    },
+
+    "email-form-api": {
+        "title": "Email Form API",
+        "description": "A Cloudflare workers API designed to send emails to a certain email, based on form submissions",
+        "type": "backend",
+        "languages": ["typescript", "javascript"],
+        "tags": ["api", "email", "form", "forms"],
+        "code_url": "https://github.com/RAPrograms/Email-Form-API",
+        "demo_url": "https://raprograms.co.uk/contact/#main",
+        "preview_uri": null
+    }
+}

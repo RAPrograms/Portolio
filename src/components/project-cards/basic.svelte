@@ -5,10 +5,12 @@
 
     const {
         data,
-        ghosted = false
+        ghosted = false,
+        validIcons
     }:{
         data: Project,
-        ghosted: boolean
+        ghosted: boolean,
+        validIcons: Set<string>
     } = $props()
 </script>
 
@@ -23,12 +25,12 @@
 
     <div class="tags">
         {#each data.tags as tag}
-            <Tag size="small" isProjectsLink={false} value={tag}/>
+            <Tag {validIcons} isProjectsLink={false} value={tag}/>
         {/each}
     </div>
 
     <div class="links">
-        <a href={data.repository_url} target="_blank" tabindex={ghosted? -1:undefined}>
+        <a href={data.code_url} target="_blank" tabindex={ghosted? -1:undefined}>
             <svg width="24" height="24" viewBox="0 0 24 24"><use href="#github-icon"/></svg>
             Code
         </a>

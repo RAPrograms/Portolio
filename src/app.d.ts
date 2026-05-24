@@ -26,25 +26,25 @@ declare global {
 		title: string
 		description: string
 		tags: Array<Stack>
-		type: string | Array<string>,
+		type: string | Array<string>
 		languages: Array<string>
-		
-		image_uri?: string
-		repository_url?: string
+		preview_uri?: string
+		code_url?: string
 		demo_url?: string
 	}
 
 	interface FeaturedProject extends Project {
-		caption: string,
+		project: Project
+		caption: string
 		theme: string
 	}
 
 	type ProjectThemes = 
-        "Deep Forest" | 
-        "Midnight Nebula" |
-        "Ocean Trench" |
-        "Desert Dusk" |
-        "Arctic Berry"
+        "deep-forest" | 
+        "midnight-nebula" |
+        "ocean-trench" |
+        "desert-dusk" |
+        "arctic-berry"
 }
 
 export {};

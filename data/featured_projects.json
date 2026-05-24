@@ -1,0 +1,17 @@
+[
+    {
+        "id": "hangman",
+        "caption": "A fun hangman game",
+        "theme": "deep-forest"
+    },
+    {
+        "id": "icon-downloader",
+        "caption": "A rust based api for Wordle",
+        "theme": "desert-dusk"
+    },
+    {
+        "id": "email-form-api",
+        "caption": "A cloudflare worker desiged to convert form submission to emails",
+        "theme": "arctic-berry"
+    }
+]
