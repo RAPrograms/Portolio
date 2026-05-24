@@ -5,13 +5,14 @@
 
     const {
         value,
-        size = "normal",
-        isProjectsLink
+        isProjectsLink,
+        validIcons
     }:{
         value: string,
-        size: "normal" | "small"
         isProjectsLink: boolean
+        validIcons: Set<string>
     } = $props()
+
 
     const [name, icon] = (() => {
         const matches = value.match(regex)
@@ -30,7 +31,7 @@
     this={isProjectsLink? "a":"div"}
     href={isProjectsLink? `/projects?tech=${name}#main`:undefined}
 >
-    {#if icon != ""}
+    {#if validIcons.has(icon) && icon != ""}
         <img src="/tag-icons/{icon}.svg" width="15" height="15" aria-hidden="true" alt="">
     {/if}
     {name}

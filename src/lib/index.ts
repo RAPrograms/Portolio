@@ -11,11 +11,11 @@ export function get_project_avalibility(){
 }
 
 export function get_project_image_uri(data: Project | FeaturedProject){
-    if(data.image_uri)
-        return data.image_uri
+    if(data.preview_uri)
+        return data.preview_uri
 
-    if(data.repository_url && data.repository_url.startsWith("https://github.com/")){
-       const repository_name = data.repository_url.replace("https://github.com/", "")
+    if(data.code_url && data.code_url.startsWith("https://github.com/")){
+       const repository_name = data.code_url.replace("https://github.com/", "")
        return "https://opengraph.githubassets.com/1/" + repository_name
     }
 

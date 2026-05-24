@@ -8,11 +8,13 @@
     const {
         data,
         theme,
-        caption
+        caption,
+        validIcons
     }:{
         data: Project,
         theme: ProjectThemes
         caption: string,
+        validIcons: Set<string>
     } = $props()
 </script>
 
@@ -41,8 +43,8 @@
     <div class="details">
         <h3>
             <span>{data.title}</span>
-            {#if data.repository_url}
-                <a href="{data.repository_url}" target="_blank" aria-label="{data["title"]} repo link">
+            {#if data.code_url}
+                <a href="{data.code_url}" target="_blank" aria-label="{data["title"]} repo link">
                     {@html GithubIcon}
                 </a>
             {/if}
@@ -50,7 +52,7 @@
         <p>{data.description}</p>
         <div class="tags">
             {#each data.tags as tag}
-                <Tag value={tag} size="normal" isProjectsLink={true}/>
+                <Tag value={tag} {validIcons} isProjectsLink={true}/>
             {/each}
         </div>
     </div>
@@ -80,27 +82,27 @@
 
             .preview{
                 // Defining preview themes
-                &[data-theme="Deep Forest"]{
+                &[data-theme="deep-forest"]{
                     --colour: #00D492; 
                     --gradient: linear-gradient(188deg,rgba(8, 57, 38, 1) 30%, rgba(5, 150, 105, 1) 68%, rgba(52, 211, 153, 1) 90%, rgba(249, 215, 147, 1) 100%);
                 }
 
-                &[data-theme="Midnight Nebula"]{
+                &[data-theme="midnight-nebula"]{
                     --colour: rgba(139, 92, 246, 1); 
                     --gradient: linear-gradient(188deg, rgba(15, 23, 42, 1) 30%, rgba(88, 28, 135, 1) 68%, rgba(139, 92, 246, 1) 90%, rgba(244, 114, 182, 1) 100%);
                 }
 
-                &[data-theme="Ocean Trench"]{
+                &[data-theme="ocean-trench"]{
                     --colour: rgba(56, 189, 248, 1); 
                     --gradient: linear-gradient(188deg, rgba(8, 47, 73, 1) 30%, rgba(3, 105, 161, 1) 68%, rgba(56, 189, 248, 1) 90%, rgba(186, 230, 253, 1) 100%);
                 }
 
-                &[data-theme="Desert Dusk"]{
+                &[data-theme="desert-dusk"]{
                     --colour: rgba(249, 115, 22, 1); 
                     --gradient: linear-gradient(188deg, rgba(67, 20, 7, 1) 30%, rgba(154, 52, 18, 1) 68%, rgba(249, 115, 22, 1) 90%, rgba(253, 186, 116, 1) 100%);
                 }
 
-                &[data-theme="Arctic Berry"]{
+                &[data-theme="arctic-berry"]{
                     --colour: rgba(45, 212, 191, 1); 
                     --gradient: linear-gradient(188deg, rgba(31, 41, 55, 1) 30%, rgba(13, 148, 136, 1) 68%, rgba(45, 212, 191, 1) 90%, rgba(251, 207, 232, 1) 100%);
                 }
@@ -141,8 +143,6 @@
                     text-align: left;
                     font-size: 4cqw;
                     flex-grow: 1;
-
-                    word-break: break-all;
 
                     // Forces 2 line captions
                     overflow: hidden;

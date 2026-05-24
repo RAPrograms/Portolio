@@ -40,11 +40,11 @@ declare global {
 	}
 
 	type ProjectThemes = 
-        "Deep Forest" | 
-        "Midnight Nebula" |
-        "Ocean Trench" |
-        "Desert Dusk" |
-        "Arctic Berry"
+        "deep-forest" | 
+        "midnight-nebula" |
+        "ocean-trench" |
+        "desert-dusk" |
+        "arctic-berry"
 }
 
 export {};
